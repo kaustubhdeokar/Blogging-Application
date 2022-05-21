@@ -1,5 +1,7 @@
 package com.example.springredditclone.service;
 
+import com.example.springredditclone.dto.AuthenticationResponse;
+import com.example.springredditclone.dto.LoginRequest;
 import com.example.springredditclone.dto.RegisterRequest;
 import com.example.springredditclone.exception.SpringRedditException;
 import com.example.springredditclone.model.NotificationEmail;
@@ -7,8 +9,12 @@ import com.example.springredditclone.model.User;
 import com.example.springredditclone.model.VerificationToken;
 import com.example.springredditclone.repo.UserRepo;
 import com.example.springredditclone.repo.VerificationTokenRepo;
+import com.example.springredditclone.security.JWTProvider;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,10 +27,12 @@ import java.util.UUID;
 @AllArgsConstructor
 public class AuthService {
 
-    private final PasswordEncoder passwordEncoder;
     private final UserRepo userRepo;
-    private final VerificationTokenRepo verificationTokenRepo;
+    private final PasswordEncoder passwordEncoder;
+    private final AuthenticationManager authenticationManager;
+    private final JWTProvider jwtProvider;
     private final MailService mailService;
+    private final VerificationTokenRepo verificationTokenRepo;
     private final String ACCOUNT_ACTIVATION = "Please activate your account";
 
     @Transactional
@@ -49,8 +57,8 @@ public class AuthService {
     }
 
     private String formMailBody(String token) {
-        return "Thank you for signing up, please click on the url to activate your account" +
-                "http://localhost:8080/api/auth/accountVerification/" + token;
+        return "Thank you for signing up, please click on the url to activate your account:" +
+                "http://localhost:8080/api/auth/accountVerification/" + token + ":";
     }
 
     private String generateVerificationToken(User user) {
@@ -70,6 +78,14 @@ public class AuthService {
         user.setCreated(Instant.now());
         user.setEnabled(false);
     }
+
+    public AuthenticationResponse login(LoginRequest request) {
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUserName(), request.getPassword()));
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        String token = jwtProvider.generateToken(authentication);
+        return new AuthenticationResponse(token,request.getUserName());
+    }
+
 
 
 }

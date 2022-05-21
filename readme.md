@@ -16,3 +16,5 @@ constructors at runtime.
     
 ### Tips
 Spring recommends using constructor injection over field injection.
+Async mail send can be simply enabled by using annotations, @EnableAsync & @Async, for much heavier use cases, we can 
+use message queues.  

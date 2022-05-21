@@ -10,4 +10,9 @@ constructors at runtime.
 ## MySql workbench.
 [Setup Video](https://www.youtube.com/watch?v=7_YrwTOPl9w)   
     
+## SMTP server 
+[mailtrap](https://mailtrap.io) 
 
+    
+### Tips
+Spring recommends using constructor injection over field injection.

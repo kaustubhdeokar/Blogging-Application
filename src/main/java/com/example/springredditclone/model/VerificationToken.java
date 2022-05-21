@@ -18,12 +18,12 @@ import static javax.persistence.FetchType.*;
 public class VerificationToken {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private String token;
 
     @OneToOne(fetch = LAZY)
     private User user;
-    private Instant employee;
+    private Instant expiryDate;
 
 }

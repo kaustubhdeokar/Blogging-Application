@@ -29,7 +29,7 @@ public class AuthController {
     }
 
     @PostMapping("/api/auth/login")
-    public  ResponseEntity<String>  login(@RequestBody LoginRequest loginRequest) {
+    public  ResponseEntity<String> login(@RequestBody LoginRequest loginRequest) {
         //we should check if the account is verified or not.
         AuthenticationResponse login = authService.login(loginRequest);
         return new ResponseEntity<>(login.getAuthenticationToken(),HttpStatus.OK);

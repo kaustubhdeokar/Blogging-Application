@@ -1,7 +1,6 @@
 package com.example.springredditclone.controller;
 
 import com.example.springredditclone.dto.SubredditDto;
-import com.example.springredditclone.model.Subreddit;
 import com.example.springredditclone.service.SubredditService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -15,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import javax.validation.Valid;
 import java.util.List;
 
+import static org.springframework.http.ResponseEntity.status;
+
 @Controller
 @AllArgsConstructor
 public class SubredditController {
@@ -22,8 +23,8 @@ public class SubredditController {
     private final SubredditService subredditService;
 
     @GetMapping("/api/subreddit")
-    public List<SubredditDto> getSubreddits() {
-        return subredditService.getAll();
+    public ResponseEntity<List<SubredditDto>> getSubreddits() {
+        return status(HttpStatus.OK).body(subredditService.getAll());
     }
 
     @GetMapping("/api/subreddit/{id}")

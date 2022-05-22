@@ -1,18 +1,17 @@
 package com.example.springredditclone.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class SubredditDto {
+public class PostResponse {
     private Long id;
-    private String name;
+    private String postName;
+    private String url;
     private String description;
-    private Integer numberOfPosts;
-
+    private String userName;
+    private String subredditName;
 }

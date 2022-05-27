@@ -1,4 +1,12 @@
 Signup.
+http://localhost:8080/api/auth/signup
+{
+{
+    "email":"<>",
+    "username":"<>",
+    "password":"<>>"
+}
+}
 MailTrap - verification code -> Authorize/Verify.
 
 Login -> token
@@ -6,8 +14,8 @@ AUTH:-> Inherit from parent.
 POST
 http://localhost:8080/api/auth/login
 {
-    "userName":"kaustubhdeokar3",
-    "password":"FedExp@08G"
+    "userName":"<>",
+    "password":"<>"
 }
 
 use the token for below calls.

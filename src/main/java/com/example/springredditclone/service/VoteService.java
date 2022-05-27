@@ -30,15 +30,18 @@ public class VoteService {
         Post post = postRepo.findById(voteDto.getPostId()).orElseThrow(() -> new PostNotFoundException("Not post with id" + voteDto.getPostId().toString()));
         User currentUser = authService.getCurrentUser();
         Optional<Vote> voteByPostAndUser = voteRepo.findVoteByPostAndUser(post, currentUser);
+
         if (voteByPostAndUser.isPresent() && voteByPostAndUser.get().getVoteType().equals(voteDto.getVoteType())) {
             throw new SpringRedditException("You have already "
                     + voteDto.getVoteType() + "'d for this post");
         }
+
         if (UPVOTE.equals(voteDto.getVoteType())) {
             post.setVoteCount(post.getVoteCount()==null?0:post.getVoteCount() + 1);
         } else {
             post.setVoteCount(post.getVoteCount()==null?0:post.getVoteCount() - 1);
         }
+
         Vote vote = mapToVote(voteDto, post);
         voteRepo.save(vote);
 

@@ -1,17 +1,16 @@
 package com.example.springredditclone.dto;
 
-import com.example.springredditclone.model.VoteType;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
+
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class VoteDto {
-
-    private VoteType voteType;
-    private Long postId;
+public class RefreshTokenRequest {
+    @NotBlank
+    private String refreshToken;
+    private String username;
 }

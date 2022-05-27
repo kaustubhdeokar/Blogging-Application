@@ -18,6 +18,7 @@ http://localhost:8080/api/auth/login
     "password":"<>"
 }
 
+Auth Type OAuth 2.
 use the token for below calls.
 
 
@@ -55,3 +56,23 @@ GET all posts.
 http://localhost:8080/api/posts
 GET a single post.
 http://localhost:8080/api/posts/27
+
+Comments
+
+1. ADD comment
+
+POST method:
+Auth token for user:
+Body:
+"postId":"<>",
+"text":"Comment 3",
+"userName":"<>"
+
+
+VOTE
+post call.
+add vote
+{
+    "postId":27,
+    "voteType":"UPVOTE"
+}

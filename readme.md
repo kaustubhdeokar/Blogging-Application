@@ -2,8 +2,6 @@
 
 This a backend project of reddit clone application using spring boot technologies such as spring data jpa, spring security and authenticates users via JWT tokens with MySQL DB.
 
-This is built following the tutorial [Spring Boot Reddit Clone](https://programmingtechie.com/2020/05/14/building-a-reddit-clone-with-spring-boot-and-angular/)
-
 The schema for the same can be found in file `schema.sql` in the root directory. 
 
 Following are the API calls allowed. 
@@ -183,7 +181,10 @@ constructors at runtime.
 ## SMTP server 
 [mailtrap](https://mailtrap.io) 
 
-    
+
+## References
+[Spring Boot Reddit Clone](https://programmingtechie.com/2020/05/14/building-a-reddit-clone-with-spring-boot-and-angular/)
+
 ### Tips
 Spring recommends using constructor injection over field injection.
 Async mail send can be simply enabled by using annotations, @EnableAsync & @Async, for much heavier use cases, we can 

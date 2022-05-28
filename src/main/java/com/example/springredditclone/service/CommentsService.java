@@ -31,17 +31,18 @@ public class CommentsService {
     private final UserRepo userRepo;
 
     public void save(CommentsDto commentsDto) {
-        Post post = postRepository.findById(commentsDto.getPostId()).orElseThrow(() -> new PostNotFoundException(commentsDto.getPostId().toString()));
+//        System.out.println(commentsDto.getPostId());
+                Post post = postRepository.findById(commentsDto.getPostId()).orElseThrow(() -> new PostNotFoundException(commentsDto.getPostId().toString()));
         User currentUser = authService.getCurrentUser();
         Comment comment = commentMapper.map(commentsDto, post, currentUser);
         commentRepository.save(comment);
-
-        String message = mailContentBuilder.build(post.getUser().getUserName() + " posted a comment on your post." + "<url>");
-        sendCommentNotification(message, post.getUser());
+//
+//        String message = mailContentBuilder.build(post.getUser().getUserName() + " posted a comment on your post." + "<url>");
+//        sendCommentNotification(message, post.getUser());
     }
-    private void sendCommentNotification(String message, User user) {
-        mailService.sendEmail(new NotificationEmail(user.getUserName() + " Commented on your post", user.getEmail(), message));
-    }
+//    private void sendCommentNotification(String message, User user) {
+//        mailService.sendEmail(new NotificationEmail(user.getUserName() + " Commented on your post", user.getEmail(), message));
+//    }
 
     public List<CommentsDto> getAllCommentsForPost(Long postId) {
         Post post = postRepository.findById(postId).orElseThrow(() -> new PostNotFoundException(postId.toString()));

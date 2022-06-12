@@ -1,6 +1,6 @@
 ## Overview 
 
-This a backend project of reddit clone application using spring boot technologies such as spring data jpa, spring security and authenticates users via JWT tokens with MySQL DB.
+This a backend project of reddit clone application using spring boot technologies such as spring data jpa, spring security and user authentication via JWT tokens with MySQL DB.
 
 The schema for the same can be found in file `schema.sql` in the root directory. 
 

@@ -1,9 +1,6 @@
 package com.example.reddit.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,6 +15,7 @@ import java.time.Instant;
 public class Comment {
 
     @Id
+    @GeneratedValue
     private Long commentid;
 
     private String text;
@@ -31,5 +29,10 @@ public class Comment {
     @ManyToOne
     private Post post;
 
-
+    public Comment(String text, User user, Post post) {
+        this.text = text;
+        this.createddate = Instant.now();
+        this.user = user;
+        this.post = post;
+    }
 }

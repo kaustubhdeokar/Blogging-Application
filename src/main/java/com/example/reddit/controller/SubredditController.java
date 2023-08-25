@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@CrossOrigin("*")
+@CrossOrigin("http://localhost:4200")
 @RequestMapping("/api/subreddit")
 public class SubredditController {
 
@@ -26,20 +26,21 @@ public class SubredditController {
     private UserService userService;
 
     @PostMapping("")
-    public ResponseEntity<String> create(@RequestBody @Valid SubredditDto subRedditDto) {
+    public ResponseEntity<String> create(@RequestBody SubredditDto subRedditDto) {
         User user = userService.getPrincipalUser();
         subredditService.save(new Subreddit(subRedditDto.getName(), subRedditDto.getDescription(), user));
         return new ResponseEntity<>("Subreddit: " + subRedditDto.getName() + " created.", HttpStatus.OK);
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<String>> getAllSubreddits() {
+    public ResponseEntity<List<SubredditDto>> getAllSubreddits() {
         List<Subreddit> subreddits = subredditService.getAll();
-        List<String> collect = subreddits.stream().map(Subreddit::toString).collect(Collectors.toList());
-        return new ResponseEntity<>(collect, HttpStatus.OK);
+        List<SubredditDto> toReturn = subreddits.stream().map(subreddit -> new SubredditDto(subreddit.getName(), subreddit.getDescription())).collect(Collectors.toList());
+        return new ResponseEntity<>(toReturn, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
+    @CrossOrigin(origins = "*")
     public ResponseEntity<Subreddit> getSubReddit(@PathVariable Long id) {
         return new ResponseEntity<>(subredditService.getSubReddit(id), HttpStatus.OK);
     }

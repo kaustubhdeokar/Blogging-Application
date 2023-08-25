@@ -31,14 +31,14 @@ public class PostService {
     private UserRepo userRepo;
 
     public PostResponse getPost(Long id) {
-        Post post = postRepo.findById(id).orElseThrow(() -> new SpringRedditException("No post found for id:" + id.toString()));
+        Post post = postRepo.findById(id).orElseThrow(() -> new SpringRedditException("No post found for id:" + id));
         return getPostResponse(post);
     }
 
     public PostResponse getPostResponse(Post post) {
         return new PostResponse(post.getPostid(), post.getPostname(),
                 post.getUrl(), post.getDescription(), post.getUser().getUsername(),
-                post.getSubreddit().getName(), 0, 0, "0");
+                post.getSubreddit().getName(), 0, 0, "0",0,0);
     }
 
 

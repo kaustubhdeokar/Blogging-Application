@@ -2,6 +2,7 @@ package com.example.reddit.controller;
 
 import com.example.reddit.dto.PostRequest;
 import com.example.reddit.dto.PostResponse;
+import com.example.reddit.model.Post;
 import com.example.reddit.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,7 +15,7 @@ import java.util.stream.Collectors;
 import static org.springframework.http.ResponseEntity.status;
 
 @RestController
-@CrossOrigin("*")
+@CrossOrigin("http://localhost:4200")
 @RequestMapping("/api/posts")
 public class PostController {
 
@@ -28,8 +29,8 @@ public class PostController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<String>> getAllPosts() {
-        List<String> allPosts = postService.getAll().stream().map(post -> post.getId()+":"+post.getDescription()).collect(Collectors.toList());
+    public ResponseEntity<List<PostResponse>> getAllPosts() {
+        List<PostResponse> allPosts = postService.getAll().stream().collect(Collectors.toList());
         return status(HttpStatus.OK).body(allPosts);
     }
 

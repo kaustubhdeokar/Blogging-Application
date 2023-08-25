@@ -119,7 +119,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"userName\":\"testuser3\",\n    \"password\":\"testuser3\"\n}",
+							"raw": "{\n    \"userName\":\"testuser2\",\n    \"password\":\"testuser2\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -260,6 +260,84 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "refresh token",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoidGVzdHVzZXIzIiwiZXhwIjoxNjkyMjkwNzY0LCJpYXQiOjE2OTIyOTA3NTQsInJvbGVzIjoiUk9MRV9VU0VSIn0.ChmDGwxj8JjjYrXxoqyjpuCR7b6BDTlbk-zag4GZiKghcZhbEdVpGD18g4D6BmdyklxW-6_2XuDeAw9NaG166arz1dwntPj2fPNe5Dyw3w3R7Y8P3w5Q-qntb0u3R-1NMsuHt7C2odHj-5M87RSNLona5zSlulxV-iQjpFFGPOS2pvOzcm13e4Fmm_uLx_91hs1_yI4euSoh11xFgGsEB5Mkg03ah2gLF6ZeB5o2lA7YAeGcLzEsqSieBIvLvtSXpbDtbVkNO4DtVIdRfCh7RdVrR72vfl-Cfm9NHYTUPii4taKPFvb3JrZiL3eY1ON9Eg4dhaf_l6oso1tr0hF7Mg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"refreshToken\":\"213eeedd-deac-4aba-bec2-d05cd1cb6917\",\n    \"username\":\"testuser3\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/auth/logout",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoidGVzdHVzZXIzIiwiZXhwIjoxNjkyMjkwODU4LCJpYXQiOjE2OTIyOTA4NDgsInJvbGVzIjoiUk9MRV9VU0VSIn0.ouByc-bEafSDt327CCyEXGNEob_AH9MoP9kT1whTuZZG2vlBb244Jo_PUHbpSvXQB61I76JfuaxPysWpSrp3M2r8i5PagebwAkwtH0Q0IFpi-mnNcULkZY9cx_xgLcfS2niBy7aOkftia2_Lxc5XMMMNwjE0fxDx6IrMvV0OarUTgYEFbz1dyFb96qWjmlYpd3O0xi4Rn3b2SpBAsaA_YCgG8bukVuKWz4y1OaTNrdF3rKdug5uNbjS3KoXPRgATIkyJX4v6NSGq7jJxRLi-3f96nLSoByMeByHZHQu6XVMkgk5kjiikUQjZBctOhBfuX7NForIxwpZeZUNBO4h3RA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"refreshToken\":\"213eeedd-deac-4aba-bec2-d05cd1cb6917\",\n    \"username\":\"testuser3\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/auth/logout",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -312,7 +390,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoidGVzdHVzZXIzIiwiaWF0IjoxNjkyMjA4OTYyLCJyb2xlcyI6IlJPTEVfVVNFUiJ9.xb5q57VFXlT1YH4I9We_3Spe_DPlxD0L9mEX9HSBioMlvw5PmDu1tlMIh-NT7sanX_UXifqNUQtFC0QVMYOWJh19016M5oE-7X2N0tbwr11gr-2mprGaZ_9weMdeo0khE6-OfZzaWmbOQKY378SG-AGGnyGpLhKzgThz4ytUWnUEHehMcXej1p2GanB3DcQqrmvPB0caGdsJxrShWXpychHNDx2cL1_L5U-30YKEMTm9-FU5pM-dMGM5Qz67ADKV0G3B3d2aLJk13mG_gRNtLoiG-ajpmhj_e21y6jayCLLMzO-GfmLIN3NyJQncqSUe2ayr-ICQxGea48o3_19Gyw",
+									"value": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoidGVzdHVzZXIzIiwiZXhwIjoxNjkyMjg5OTkzLCJpYXQiOjE2OTIyODk5ODMsInJvbGVzIjoiUk9MRV9VU0VSIn0.VHp98b1MfktuUcw43yZ0oISltcAj0NNkp-V5r4LOvvjMV8gBsTVVdtWJh_Rrbefye-4vAqk39mANVrb99JBpaWeRzMQ1qtQf-vTrEIJBUhFp2Qzby9XuXMZr80K0r7wGnWMBESd4W1vBkjk2unj3eiS-769pm3TKa8m3UTzgczefhesdu0icUWvSwEe47qwO81cBp2SKl07YRgDnWJI4-WvR6mgh6xAuNX6BFkgjPSg61L2FYu21Xj5BGP6X8n2nptTBdkoR3X2ala2r8W0dQjC-pwNS0e_UBmJ8hQofHHkrxP0fzn9AickPiJJUOyCKlIW5Lmjdh_D9Mr35YgVd7A",
 									"type": "string"
 								}
 							]
@@ -390,6 +468,154 @@
 								"api",
 								"posts",
 								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "comments",
+			"item": [
+				{
+					"name": "create comment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoidGVzdHVzZXIzIiwiaWF0IjoxNjkyMjgzODM5LCJyb2xlcyI6IlJPTEVfVVNFUiJ9.rR4qwIBEltWFsZzYkx70vrdfFZtNgZJ9Wx3zR-B1ijJlvjqmWmt9GF54zeCKdWSVY7b8K5QZ1gvMamgwmZSi94DdUpW7PcIBrTrmm_pT54PqWTjWuZAUcoLYXGRxuIZNrMHQOd-8cC2E1NGkIKHxg9w-Kspm2wMDmOlQrHTsPN7b14KGOWXTvaqUj5rEDZA_5diEQvM1Sy8xgATRR6f6rfSMui_3MNIsIbQekwzY7z0Fv5_A7Rh6cyFCq05quHvhlavfopsi-TS74cHs-vqpE-pbBl9qsXUKCLkOBsF0ZilT0_OUJZ3xXX9bk24r-MVHJF9sG-kfqgyexAXliYJeKg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"postId\":1,\n    \"text\":\"goat roger-3\",\n    \"userName\":\"testuser3\"\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/comments",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"comments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "comments/by-post/1",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoidGVzdHVzZXIzIiwiaWF0IjoxNjkyMjgzODM5LCJyb2xlcyI6IlJPTEVfVVNFUiJ9.rR4qwIBEltWFsZzYkx70vrdfFZtNgZJ9Wx3zR-B1ijJlvjqmWmt9GF54zeCKdWSVY7b8K5QZ1gvMamgwmZSi94DdUpW7PcIBrTrmm_pT54PqWTjWuZAUcoLYXGRxuIZNrMHQOd-8cC2E1NGkIKHxg9w-Kspm2wMDmOlQrHTsPN7b14KGOWXTvaqUj5rEDZA_5diEQvM1Sy8xgATRR6f6rfSMui_3MNIsIbQekwzY7z0Fv5_A7Rh6cyFCq05quHvhlavfopsi-TS74cHs-vqpE-pbBl9qsXUKCLkOBsF0ZilT0_OUJZ3xXX9bk24r-MVHJF9sG-kfqgyexAXliYJeKg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/comments/by-post/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"comments",
+								"by-post",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "comments/by-user/52",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoidGVzdHVzZXIzIiwiaWF0IjoxNjkyMjgzODM5LCJyb2xlcyI6IlJPTEVfVVNFUiJ9.rR4qwIBEltWFsZzYkx70vrdfFZtNgZJ9Wx3zR-B1ijJlvjqmWmt9GF54zeCKdWSVY7b8K5QZ1gvMamgwmZSi94DdUpW7PcIBrTrmm_pT54PqWTjWuZAUcoLYXGRxuIZNrMHQOd-8cC2E1NGkIKHxg9w-Kspm2wMDmOlQrHTsPN7b14KGOWXTvaqUj5rEDZA_5diEQvM1Sy8xgATRR6f6rfSMui_3MNIsIbQekwzY7z0Fv5_A7Rh6cyFCq05quHvhlavfopsi-TS74cHs-vqpE-pbBl9qsXUKCLkOBsF0ZilT0_OUJZ3xXX9bk24r-MVHJF9sG-kfqgyexAXliYJeKg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/comments/by-user/testuser3",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"comments",
+								"by-user",
+								"testuser3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "votes",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoidGVzdHVzZXIzIiwiaWF0IjoxNjkyMjg0MzI0LCJyb2xlcyI6IlJPTEVfVVNFUiJ9.uTD9IunMCLqpwES567BaUW5FvDxjUqfnAhmg7fqRvIXT1O-Afm-tXIbOz4O1-wPjGDo7MPhtDjX06nGC9xCUW0fzXesyyCMtsZgmFNj8avQ224HqO2C9zF265jGsYzKCFio3BMH-ZkFe8eIG8cbkxSBF9RErAZaU37_H3ia3hBT9-Kul49dgO6-YfQl6ejR9Bf4slnhK5DqXXRKbnCjAJxYZFtu7iQPnVOKvEWiGVZGJBuxsQEPxNeHOrSlmn1-ZnIxHAzobyqBO__2zgSyv6dHebJ8Nf1oHwrwSlhFk3r5sIuDlFit4fH6EqKLeUxbZHVh1a5HDXeSEd3KNWEFAMA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"voteType\":0,\n    \"postId\":2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/votes",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"votes"
 							]
 						}
 					},

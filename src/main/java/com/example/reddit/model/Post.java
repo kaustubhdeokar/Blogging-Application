@@ -51,4 +51,12 @@ public class Post {
         this.user = user;
         this.subreddit = subreddit;
     }
+
+    public Integer getVotecount() {
+        return votecount;
+    }
+
+    public void setVotecount(Integer votecount) {
+        this.votecount = votecount;
+    }
 }

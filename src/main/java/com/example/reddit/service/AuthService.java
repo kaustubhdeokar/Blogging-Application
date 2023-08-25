@@ -1,6 +1,7 @@
 package com.example.reddit.service;
 
 import com.example.reddit.dto.AuthenticationResponse;
+import com.example.reddit.dto.RefreshTokenRequest;
 import com.example.reddit.dto.RegisterUser;
 import com.example.reddit.exception.SpringRedditException;
 import com.example.reddit.model.NotificationEmail;
@@ -20,21 +21,28 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Instant;
 import java.util.Optional;
 import java.util.UUID;
 
 @Service
 @Transactional
 public class AuthService {
+    @Autowired
+    private MailService mailService;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+    @Autowired
+    private UserRepo userRepo;
+    @Autowired
+    private VerificationTokenRepo tokenRepo;
+    @Autowired
+    private TokenService tokenService;
+    @Autowired
+    private AuthenticationManager authenticationManager;
 
-    @Autowired private MailService mailService;
-    @Autowired private PasswordEncoder passwordEncoder;
-    @Autowired private UserRepo userRepo;
-    @Autowired private VerificationTokenRepo tokenRepo;
-
-    @Autowired private TokenService tokenService;
-    @Autowired private AuthenticationManager authenticationManager;
-
+    @Autowired
+    private RefreshTokenService refreshTokenService;
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
     public void signup(RegisterUser registerUser) {
@@ -70,7 +78,7 @@ public class AuthService {
     public void enableUserHavingToken(VerificationToken verificationToken) {
         User user = verificationToken.getUser();
         Optional<User> optionalUser = userRepo.findById(user.getUserid());
-        if(!optionalUser.isPresent()){
+        if (!optionalUser.isPresent()) {
             throw new SpringRedditException("User not present, invalid token");
         }
         User verifiedUser = optionalUser.get();
@@ -84,13 +92,22 @@ public class AuthService {
             Authentication auth = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(username, password));
             String token = tokenService.generateJwt(auth);
-            return new AuthenticationResponse(userRepo.findByUsername(username).get(), token);
+            return new AuthenticationResponse(username, token,
+                    refreshTokenService.generateRefreshToken().getToken(),
+                    Instant.now().plusMillis(tokenService.getJwtExpirationInMillis()));
         } catch (AuthenticationServiceException e) {
-            return new AuthenticationResponse(null, e.getMessage());
+            return new AuthenticationResponse(null, e.getMessage(), null, null);
+        } catch (DisabledException e) {
+            return new AuthenticationResponse(null, "User is disabled. Please verify the user.", null, null);
         }
-        catch (DisabledException e){
-            return new AuthenticationResponse(null, "User is disabled. Please verify the user.");
-        }
+
+    }
+
+    public AuthenticationResponse refreshToken(RefreshTokenRequest refreshTokenRequest) {
+        refreshTokenService.validateRefreshToken(refreshTokenRequest.getRefreshToken());
+        String token = tokenService.generateJwt(refreshTokenRequest.getUsername());
+        return new AuthenticationResponse(refreshTokenRequest.getUsername(), token,
+                refreshTokenRequest.getRefreshToken(), Instant.now().plusMillis(tokenService.getJwtExpirationInMillis()));
 
     }
 }

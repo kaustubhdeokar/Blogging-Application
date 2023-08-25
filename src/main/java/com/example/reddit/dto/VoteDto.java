@@ -1,6 +1,6 @@
-package com.example.springredditclone.dto;
+package com.example.reddit.dto;
 
-import com.example.springredditclone.model.VoteType;
+import com.example.reddit.model.VoteType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,5 +13,10 @@ import lombok.NoArgsConstructor;
 public class VoteDto {
 
     private VoteType voteType;
+
     private Long postId;
+
+
+
+
 }

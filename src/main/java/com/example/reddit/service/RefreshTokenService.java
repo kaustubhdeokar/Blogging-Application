@@ -1,8 +1,8 @@
-package com.example.springredditclone.service;
+package com.example.reddit.service;
 
-import com.example.springredditclone.exception.SpringRedditException;
-import com.example.springredditclone.model.RefreshToken;
-import com.example.springredditclone.repo.RefreshTokenRepository;
+import com.example.reddit.exception.SpringRedditException;
+import com.example.reddit.model.RefreshToken;
+import com.example.reddit.repo.RefreshTokenRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,7 +15,7 @@ import java.util.UUID;
 @Transactional
 public class RefreshTokenService {
 
-    private final RefreshTokenRepository refreshTokenRepository;
+    private RefreshTokenRepository refreshTokenRepository;
 
     public RefreshToken generateRefreshToken() {
         RefreshToken refreshToken = new RefreshToken();

@@ -1,19 +1,20 @@
 ## Overview 
 
-This a backend project of reddit clone application using spring boot technologies such as spring data jpa, spring security and authenticates users via JWT tokens with MySQL DB.
+This a backend project of Blogging application using spring boot technologies such as spring data jpa, spring security and authenticates users via JWT tokens with MySQL DB.
 
-The schema for the same can be found in file `schema.sql` in the root directory. 
+The schema for the same can be found in file `schema.sql` in the root directory.
 
 Following are the API calls allowed. 
 
 #### Sign Up
 
-![sign up](src/main/resources/images/SignUp.png)
+![sign up](src/main/resources/static/signup.png)
 
 ```
-Signup - Method:POST
+Method: Signup 
+Protocol: POST
     
-    http://localhost:8080/api/auth/signup
+    /api/auth/signup
     {
         {
             "email":"<>",
@@ -23,20 +24,28 @@ Signup - Method:POST
     }
 
 ```
-Setting up mailTrap (configured in application.properties) to receive the verification code. Authorize the user via the link sent
-![verify account](src/main/resources/images/mailtrap.png)
+> After the user is registered, we send a verification mail on a mock third party service
+mail service as mailTrap. 
+> Configurations can be found in application.properties.
+![verify account](src/main/resources/static/mailtrap.png)
 
-![verify account](src/main/resources/images/account_verify1.png)
 
-![verify account](src/main/resources/images/account_verify_2.png)
+> Use the <strong>Verification Code</strong> sent to the mail id to verify the user: on url 
+```
+Method: Account Verification 
+Protocol: GET
+    
+    /api/auth/accountVerification/{code}
+
+```
+
+![verify account](src/main/resources/static/verification.png)
 
 #### Login
 
 Method: POST
 
-![login](src/main/resources/images/login1.png)
-
-![login](src/main/resources/images/login2.png)
+![login](src/main/resources/static/login.png)
 ```
 http://localhost:8080/api/auth/login
 {
@@ -44,9 +53,14 @@ http://localhost:8080/api/auth/login
     "password":"<>"
 }
 ```
+
+If users try to login without verifying themselves, we send message as follows:
+
+![User logs in without verifying](src/main/resources/static/user_verification_fail.png)
+
 Using the authentication token for all further calls, in order to validate the user making the call before executing the request each time.
 
-#### SUBREDDITS
+#### TOPICS
 
 | Calls                | Method   | URL                 |
 | :------------------: | :------: | :--------------:    |
@@ -54,13 +68,7 @@ Using the authentication token for all further calls, in order to validate the u
 | Create Subreddit     | POST     | /api/subreddit      |
 | Get One Subreddit    | GET      |	/api/subreddit/{id} |
 
-![subreddit get all](src/main/resources/images/subreddit1.png)
-
-![subreddit get all result](src/main/resources/images/subreddit2.png)
-
-![subreddit post query](src/main/resources/images/subreddit_post1.png)
-
-Create subreddit : POST
+##### Create Subreddit
 ```
 http://localhost:8080/api/subreddit
 {
@@ -68,11 +76,18 @@ http://localhost:8080/api/subreddit
     "description":"description2"
 }
 ```
-Result: Post name, description:
 
-![subreddit result](src/main/resources/images/subreddit_post2.png)
+![subreddit post query](src/main/resources/static/subreddit/create.png)
 
-#### POSTS
+#### Get Subreddit. 
+
+![subreddit get all](src/main/resources/static/subreddit/get_all.png)
+
+##### Get by id
+
+![subreddit result](src/main/resources/static/subreddit/by_id.png)
+
+### POSTS
 
 API calls for posts.
 
@@ -84,34 +99,19 @@ API calls for posts.
 | /api/posts/by-subreddit/{id} |GET |getPostsBySubreddit |
 | /api/posts/by-user/{name} | GET |	getPostsByUsername |
 
-![get posts](src/main/resources/images/postget.png)
+#### Create Post
 
-Result
+![create post](src/main/resources/static/posts/create.png)
 
-![create post](src/main/resources/images/postget2.png)
+#### Get Posts
 
-Post query.
+![get posts](src/main/resources/static/posts/list.png)
 
-![create post](src/main/resources/images/post_query.png)
+#### By id
+![get by id](src/main/resources/static/posts/byid.png)
 
-```
-POST
- {
-     "subredditName":"/r/Subreddit1",
-     "postName":"This is my third post in subreddit 1",
-     "url":"http://google.com",
-     "description":"third post"
- }
-
-```
-
-Result
-
-![create post](src/main/resources/images/post_result.png)
-
-Result By Id.
-
-![create post](src/main/resources/images/post_result_id.png)
+#### By subreddit
+![get by id](src/main/resources/static/posts/bysubreddit.png)
 
 #### COMMENTS
 

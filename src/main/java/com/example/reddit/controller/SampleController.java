@@ -10,16 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/admin")
 public class SampleController {
 
-    @GetMapping("/path1")
-    public String path1Entry() {
-        return "path 1 access";
-    }
-
-    @GetMapping("/path2")
-    public String path2Entry() {
-        return "path 2 access";
-    }
-
 
 
 }

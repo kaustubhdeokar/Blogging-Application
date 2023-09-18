@@ -1,6 +1,7 @@
 ## Overview 
 
-> This a backend part project of Blogging application using spring boot technologies such as spring data jpa, spring security and authenticates users via JWT tokens with MySQL DB.
+> This a backend part project of Blogging application using spring boot technologies such as spring data jpa, spring security and authenticates users via JWT tokens with MySQL DB.<br>
+> Frontend portion can be viewed here. <a href="https://github.com/kaustubhdeokar/angular-works/tree/main/angular-reddit">Angular-UI</a>
 
 > Supports functionality for
     >> User authentication & authorization via spring security using with JWT tokens.<br>

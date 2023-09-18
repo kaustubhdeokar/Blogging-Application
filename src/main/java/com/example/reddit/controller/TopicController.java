@@ -5,7 +5,6 @@ import com.example.reddit.model.Subreddit;
 import com.example.reddit.model.User;
 import com.example.reddit.service.SubredditService;
 import com.example.reddit.service.UserService;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +16,7 @@ import java.util.stream.Collectors;
 @RestController
 @CrossOrigin("http://localhost:4200")
 @RequestMapping("/api/subreddit")
-public class SubredditController {
+public class TopicController {
 
     @Autowired
     private SubredditService subredditService;

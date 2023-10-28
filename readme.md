@@ -15,6 +15,8 @@
 > Endpoints documented via OpenAPI/Swagger-UI. 
 <br>http://localhost:8080/swagger-ui/index.html
 
+> Postman API calls can be found in the file: <strong>Messaging - app.postman_collection.json</strong>
+
 > The schema for the same can be found in file `schema.sql` in the root directory.
 
 > Documentation can be found in the file <strong>documentation.md</strong>

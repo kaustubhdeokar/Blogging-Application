@@ -1,7 +1,7 @@
 package com.example.reddit.service;
 
 import com.example.reddit.dto.CommentsDto;
-import com.example.reddit.exception.SpringRedditException;
+import com.example.reddit.exception.CustomException;
 import com.example.reddit.model.Comment;
 import com.example.reddit.model.Post;
 import com.example.reddit.model.User;
@@ -26,7 +26,7 @@ public class CommentsService {
     private PostRepo postRepository;
     private final CommentRepo commentRepository;
     @Autowired
-    private final UserService userService;
+    private final UserDetailsServiceImpl userService;
     @Autowired
     private final MailService mailService;
     private final MailContentBuilder mailContentBuilder;
@@ -35,14 +35,14 @@ public class CommentsService {
 
     public void save(CommentsDto commentsDto) {
 
-        Post post = postRepository.findById(commentsDto.getPostId()).orElseThrow(() -> new SpringRedditException(commentsDto.getPostId().toString()));
+        Post post = postRepository.findById(commentsDto.getPostId()).orElseThrow(() -> new CustomException(commentsDto.getPostId().toString()));
         User currentUser = userService.getPrincipalUser();
         Comment comment = new Comment(commentsDto.getText(), currentUser, post);
         commentRepository.save(comment);
     }
 
     public List<CommentsDto> getAllCommentsForPost(Long postId) {
-        Post post = postRepository.findById(postId).orElseThrow(() -> new SpringRedditException(postId.toString()));
+        Post post = postRepository.findById(postId).orElseThrow(() -> new CustomException(postId.toString()));
         return commentRepository.findByPost(post).stream().map(this::getCommentDtoFromComment).collect(Collectors.toList());
 
     }

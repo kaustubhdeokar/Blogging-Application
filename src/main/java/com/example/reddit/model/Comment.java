@@ -12,6 +12,7 @@ import java.time.Instant;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "comment")
+@Table(name = "comment")
 public class Comment {
 
     @Id
@@ -27,6 +28,7 @@ public class Comment {
     private User user;
 
     @ManyToOne
+    @JoinColumn(name = "postid", referencedColumnName = "postid")
     private Post post;
 
     public Comment(String text, User user, Post post) {

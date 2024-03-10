@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.Instant;
+import java.util.List;
 
 @Entity
 @Table(name = "post")
@@ -18,8 +19,7 @@ import java.time.Instant;
 @NoArgsConstructor
 public class Post {
 
-    @Id
-    @GeneratedValue
+    @Id @GeneratedValue
     private Long postid;
 
     @NotBlank(message = "postname cannot be empty.")
@@ -28,28 +28,28 @@ public class Post {
     @Nullable
     private String url;
 
-    @Nullable
-    @Lob
+    @Nullable @Lob
     private String description;
 
     private Integer votecount;
 
-    @ManyToOne
-    @JoinColumn(name = "userId", referencedColumnName = "userId")
+    @ManyToOne @JoinColumn(name = "userId", referencedColumnName = "userid")
     private User user;
 
     private Instant createddate;
 
-    @ManyToOne
-    @JoinColumn(name = "subreddit", referencedColumnName = "id")
-    private Subreddit subreddit;
+    @ManyToOne @JoinColumn(name = "topic", referencedColumnName = "topicid")
+    private Topic topic;
 
-    public Post(String postname, String url, String description, User user, Subreddit subreddit) {
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "post", cascade = CascadeType.ALL)
+    private List<Vote> vote;
+
+    public Post(String postname, String url, String description, User user, Topic topic) {
         this.postname = postname;
         this.url = url;
         this.description = description;
         this.user = user;
-        this.subreddit = subreddit;
+        this.topic = topic;
     }
 
     public Integer getVotecount() {

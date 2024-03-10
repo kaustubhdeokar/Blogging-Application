@@ -1,7 +1,7 @@
 package com.example.reddit.model;
 
 
-import com.example.reddit.exception.SpringRedditException;
+import com.example.reddit.exception.CustomException;
 
 import java.util.Arrays;
 
@@ -19,7 +19,7 @@ public enum VoteType {
         return Arrays.stream(VoteType.values())
                 .filter(value -> value.getDirection().equals(direction))
                 .findAny()
-                .orElseThrow(() -> new SpringRedditException("Vote not found"));
+                .orElseThrow(() -> new CustomException("Vote not found"));
     }
 
     public Integer getDirection() {

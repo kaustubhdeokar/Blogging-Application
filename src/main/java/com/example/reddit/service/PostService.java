@@ -2,12 +2,12 @@ package com.example.reddit.service;
 
 import com.example.reddit.dto.PostRequest;
 import com.example.reddit.dto.PostResponse;
-import com.example.reddit.exception.SpringRedditException;
+import com.example.reddit.exception.CustomException;
 import com.example.reddit.model.Post;
-import com.example.reddit.model.Subreddit;
+import com.example.reddit.model.Topic;
 import com.example.reddit.model.User;
 import com.example.reddit.repo.PostRepo;
-import com.example.reddit.repo.SubredditRepo;
+import com.example.reddit.repo.TopicRepo;
 import com.example.reddit.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -24,21 +24,21 @@ public class PostService {
     @Autowired
     private PostRepo postRepo;
     @Autowired
-    private SubredditRepo subredditRepo;
+    private TopicRepo topicRepo;
     @Autowired
-    private UserService userService;
+    private UserDetailsServiceImpl userService;
     @Autowired
     private UserRepo userRepo;
 
     public PostResponse getPost(Long id) {
-        Post post = postRepo.findById(id).orElseThrow(() -> new SpringRedditException("No post found for id:" + id));
+        Post post = postRepo.findById(id).orElseThrow(() -> new CustomException("No post found for id:" + id));
         return getPostResponse(post);
     }
 
     public PostResponse getPostResponse(Post post) {
         return new PostResponse(post.getPostid(), post.getPostname(),
                 post.getUrl(), post.getDescription(), post.getUser().getUsername(),
-                post.getSubreddit().getName(), 0, 0, "0",0,0);
+                post.getTopic().getName(), 0, 0, "0",0,0);
     }
 
 
@@ -47,17 +47,17 @@ public class PostService {
     }
 
     public void save(PostRequest postRequest) {
-        Subreddit subreddit = subredditRepo.findByName(postRequest.getSubredditName())
-                .orElseThrow(() -> new SpringRedditException(postRequest.getSubredditName()));
+        Topic topic = topicRepo.findByName(postRequest.getTopicName())
+                .orElseThrow(() -> new CustomException(postRequest.getTopicName()));
         postRepo.save(new Post(postRequest.getPostName(), postRequest.getUrl(),
-                postRequest.getDescription(), userService.getPrincipalUser(), subreddit));
+                postRequest.getDescription(), userService.getPrincipalUser(), topic));
     }
 
 
-    public List<PostResponse> getPostsBySubreddit(Long id) {
-        Subreddit subreddit = subredditRepo.findById(id)
-                .orElseThrow(() -> new SpringRedditException(id.toString()));
-        List<Post> posts = postRepo.findAllBySubreddit(subreddit);
+    public List<PostResponse> getPostsByTopic(Long id) {
+        Topic topic = topicRepo.findById(id)
+                .orElseThrow(() -> new CustomException(id.toString()));
+        List<Post> posts = postRepo.findAllByTopic(topic);
         return posts.stream().map(this::getPostResponse).collect(Collectors.toList());
     }
 

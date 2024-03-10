@@ -6,10 +6,10 @@ import org.springframework.scheduling.annotation.EnableAsync;
 
 @SpringBootApplication
 @EnableAsync
-public class RedditApplication {
+public class BloggingApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(RedditApplication.class, args);
+		SpringApplication.run(BloggingApplication.class, args);
 	}
 
 }

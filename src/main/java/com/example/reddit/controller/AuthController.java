@@ -1,14 +1,15 @@
 package com.example.reddit.controller;
 
 import com.example.reddit.dto.AuthenticationResponse;
-import com.example.reddit.dto.LoginRequest;
+import com.example.reddit.dto.LoginRequestDto;
 import com.example.reddit.dto.RefreshTokenRequest;
-import com.example.reddit.dto.RegisterUser;
+import com.example.reddit.dto.RegisterUserDto;
 import com.example.reddit.model.VerificationToken;
 import com.example.reddit.service.AuthService;
 import com.example.reddit.service.RefreshTokenService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,8 +26,13 @@ public class AuthController {
     private RefreshTokenService refreshTokenService;
 
     @PostMapping("/signup")
-    public ResponseEntity<String> signup(@RequestBody RegisterUser registerUser) {
-        service.signup(registerUser);
+    public ResponseEntity<String> signup(@RequestBody RegisterUserDto registerUserDto) {
+        try {
+            service.signup(registerUserDto);
+        }
+        catch (DataIntegrityViolationException e){
+            return new ResponseEntity<>("Duplicate username/email.", HttpStatus.BAD_REQUEST);
+        }
         return new ResponseEntity<>("Registration done. Check mail to verify signup.", HttpStatus.OK);
     }
 
@@ -38,14 +44,14 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public AuthenticationResponse loginUser(@RequestBody LoginRequest registerUserDTO) {
+    public AuthenticationResponse loginUser(@RequestBody LoginRequestDto registerUserDTO) {
         return service.loginUser(registerUserDTO.getUsername(), registerUserDTO.getPassword());
     }
 
     @PostMapping("/refresh/token")
-    public ResponseEntity<String> refreshToken(@Valid @RequestBody RefreshTokenRequest refreshTokenRequest) {
+    public ResponseEntity<AuthenticationResponse> refreshToken(@Valid @RequestBody RefreshTokenRequest refreshTokenRequest) {
         AuthenticationResponse authenticationResponse = service.refreshToken(refreshTokenRequest);
-        return new ResponseEntity<>(authenticationResponse.toString(), HttpStatus.OK);
+        return new ResponseEntity<>(authenticationResponse, HttpStatus.OK);
     }
 
     @PostMapping("/logout")

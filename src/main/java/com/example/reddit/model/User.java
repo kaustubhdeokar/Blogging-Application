@@ -5,14 +5,18 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@Builder
 @Entity
 @Table(name = "user")
 public class User {
@@ -20,7 +24,6 @@ public class User {
     @GeneratedValue
     private Long userid;
     @NotBlank(message = "Username is required")
-    @Column(unique = true)
     private String username;
     @NotBlank(message = "Password is required")
     private String password;
@@ -30,59 +33,19 @@ public class User {
     private Instant created;
     private boolean enabled;
 
-    public User(String username, String password, String email) {
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "userid")},
+            inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "roleid")})
+    private List<Role> roles = new ArrayList<>();
+
+    public User(String username, String password, String email, List<Role> roles) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.created = Instant.now();
         this.enabled = false;
-    }
-
-    public Long getUserid() {
-        return userid;
-    }
-
-    public void setUserid(Long userid) {
-        this.userid = userid;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Instant getCreated() {
-        return created;
-    }
-
-    public void setCreated(Instant created) {
-        this.created = created;
-    }
-
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
+        this.roles = roles;
     }
 }

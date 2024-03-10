@@ -13,15 +13,16 @@ import java.util.List;
 
 
 @Data
+@Table(name = "topic")
 @Entity
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Subreddit {
+public class Topic {
 
     @Id
     @GeneratedValue
-    private Long id;
+    private Long topicid;
 
     @NotBlank(message = "Community name is required")
     private String name;
@@ -29,7 +30,7 @@ public class Subreddit {
     @NotBlank(message = "description is required")
     private String description;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "topic", cascade = CascadeType.ALL)
     private List<Post> posts;
 
     private Instant createddate;
@@ -37,7 +38,7 @@ public class Subreddit {
     @ManyToOne
     private User user;
 
-    public Subreddit(String name, String description, User user) {
+    public Topic(String name, String description, User user) {
         this.name = name;
         this.description = description;
         this.posts = new ArrayList<>();
@@ -47,6 +48,6 @@ public class Subreddit {
 
     @Override
     public String toString() {
-        return "id=" + id + ", name='" + name + '\'' + '}';
+        return "id=" + topicid + ", name='" + name + '\'' + '}';
     }
 }

@@ -14,7 +14,7 @@ create table user
     user_name varchar(255) null
 );
 
-create table subreddit
+create table topic
 (
     id           bigint       not null
         primary key,
@@ -35,10 +35,10 @@ create table post
     post_name    varchar(255) null,
     url          varchar(255) null,
     vote_count   int          null,
-    subreddit    bigint       null,
+    topic    bigint       null,
     user_id      bigint       null,
     constraint FK3hlixjckxntthc3o02w1h0ku7
-        foreign key (subreddit) references subreddit (id),
+        foreign key (topic) references topic (id),
     constraint FK72mt33dhhs48hf9gcqrq4fxte
         foreign key (user_id) references user (user_id)
 );
@@ -63,7 +63,7 @@ create table subreddit_posts
     constraint UK_ih17w4fa2em7w3u1tt8gqv2wh
         unique (posts_post_id),
     constraint FK1plpyiqs72shw84g90q0fes5r
-        foreign key (subreddit_id) references subreddit (id),
+        foreign key (subreddit_id) references topic (id),
     constraint FKl27wc8sin3rt45ayge7fanx10
         foreign key (posts_post_id) references post (post_id)
 );

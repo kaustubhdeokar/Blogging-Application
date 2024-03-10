@@ -1,6 +1,6 @@
 package com.example.reddit.service;
 
-import com.example.reddit.exception.SpringRedditException;
+import com.example.reddit.exception.CustomException;
 import com.example.reddit.model.NotificationEmail;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,8 +11,6 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
-import org.thymeleaf.TemplateEngine;
-import org.thymeleaf.context.Context;
 
 @Service
 public class MailService {
@@ -22,7 +20,7 @@ public class MailService {
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Async
-    public void sendEmail(NotificationEmail notificationEmail) throws SpringRedditException {
+    public void sendEmail(NotificationEmail notificationEmail) throws CustomException {
         logger.info("{}", "In send mail");
         MimeMessagePreparator messagePreparator = mimeMessage -> {
             MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
@@ -35,7 +33,7 @@ public class MailService {
             mailSender.send(messagePreparator);
             logger.info("{}", "Activation email sent!!");
         } catch (MailException e) {
-            throw new SpringRedditException("Exception occurred when sending mail to " + notificationEmail.getRecipient());
+            throw new CustomException("Exception occurred when sending mail to " + notificationEmail.getRecipient());
         }
 
     }

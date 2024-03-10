@@ -1,7 +1,7 @@
 package com.example.reddit.service;
 
 import com.example.reddit.dto.VoteDto;
-import com.example.reddit.exception.SpringRedditException;
+import com.example.reddit.exception.CustomException;
 import com.example.reddit.model.Post;
 import com.example.reddit.model.User;
 import com.example.reddit.model.Vote;
@@ -21,14 +21,14 @@ public class VoteService {
     @Autowired
     private PostRepo postRepo;
     @Autowired
-    private UserService userService;
+    private UserDetailsServiceImpl userService;
 
     @Autowired
     private VoteRepo voteRepo;
 
     public void vote(VoteDto voteDto) {
 
-        Post post = postRepo.findById(voteDto.getPostId()).orElseThrow(() -> new SpringRedditException("Not post with id" + voteDto.getPostId().toString()));
+        Post post = postRepo.findById(voteDto.getPostId()).orElseThrow(() -> new CustomException("Not post with id" + voteDto.getPostId().toString()));
         User currentUser = userService.getPrincipalUser();
         Optional<Vote> voteByPostAndUser = voteRepo.findVoteByPostAndUser(post, currentUser);
 

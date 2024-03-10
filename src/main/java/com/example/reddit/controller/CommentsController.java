@@ -31,7 +31,7 @@ public class CommentsController {
     }
 
     @GetMapping("/by-user/{userName}")
-    public ResponseEntity<List<CommentsDto>> getAllCommentsByUser(@PathVariable String userName){
-        return status(HttpStatus.OK)                .body(commentsService.getAllCommentsForUser(userName));
+    public ResponseEntity<List<CommentsDto>> getAllCommentsByUser(@PathVariable String userName) {
+        return status(HttpStatus.OK).body(commentsService.getAllCommentsForUser(userName));
     }
 }

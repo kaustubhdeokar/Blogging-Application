@@ -1,0 +1,426 @@
+{
+	"info": {
+		"_postman_id": "1f1cb39e-4473-44ac-837d-849aa2d524d4",
+		"name": "Reddit",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "7749014"
+	},
+	"item": [
+		{
+			"name": "subreddit",
+			"item": [
+				{
+					"name": "create subreddit",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoid29ya2VyMSIsImV4cCI6MTY5NTk0NTk0NiwiaWF0IjoxNjk0OTQ1OTQ2LCJyb2xlcyI6IlJPTEVfVVNFUiJ9.mntGRLc32kEZrdOoxwGScHWlcGt4ydvLvAnQ6Sjs6JnhQXcrIbct3tRIOdRrfIfC2FDImoJpDYho861zJiWJbNAizLVJoHz_NZL9yXJtx6ziRgI_MWyFmlxBt7nPaKBADho_RqAju9zpwuIoQY9VrB3oyd2K_6fruSByUpRww64TcVBdjKLFEMzIOa0j5TJl6J6H2zIuQ0ijhaRxtTsLUWxWVVewzP4TkXOsWNWbxpLfWmq2rNqjCWZX2dgbVLH9zQss8iJO4l84cwPphkz61L8ORXtgh9UBwfmu3c9_hGMR4Y3yKetcIitaHaLQja6m_SxvnCSh82Il0ZIrOlVHLA"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"finance\",\n    \"description\":\"finance news and updates\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:8080/api/subreddit"
+					},
+					"response": []
+				},
+				{
+					"name": "all subreddit",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": "localhost:8080/api/subreddit/all"
+					},
+					"response": []
+				},
+				{
+					"name": "get subreddit by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoidGVzdHVzZXIzIiwiaWF0IjoxNjkyMjA2MjAxLCJyb2xlcyI6IlJPTEVfVVNFUiJ9.MobosMlWYMbAPWqUEZw_8UnyWFLl6dgm4FKoQ3MloYrEPDfV87asNzOknCWtal19AMX7iK6_VV0QlPOap-JjhhznxeR9mJi5QgkctgyOPZzE6H_Bdorr9xkWkAeEP8AwGZUXrSK9vWaVfEc8AltWVzD84y5dBX8rcEArw-ynr8Jv8uz6B47mhLk0yI7Wf8zZ49RjGKE0NIVMliS7hjzd7-p2OANOhg0bdzyXwDCB63N7QT4sdI0jIFNwzUBdlfP3g3iwWlzMjsyWZDVuVT-59RHkcJCPqluIH2wFusmSR5kAdGT2FtrrXdYKn1W7qFSt147faIRtURyooOO60uYEmQ"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "localhost:8080/api/subreddit/3"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user-auth",
+			"item": [
+				{
+					"name": "signup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\":\"testuser3@gmail.com\",\n    \"username\":\"testuser3\",\n    \"password\":\"testuser3\"\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:8080/api/auth/signup"
+					},
+					"response": []
+				},
+				{
+					"name": "accountVerification",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/api/auth/accountVerification/9ae47624-7abd-4d07-a908-e22033f2d7fb"
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\":\"worker1\",\n    \"password\":\"worker1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/auth/login"
+					},
+					"response": []
+				},
+				{
+					"name": "login-jwt",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\":\"user3\",\n    \"password\":\"user3\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/auth/login"
+					},
+					"response": []
+				},
+				{
+					"name": "register user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\":\"worker1\",\n    \"password\":\"worker1\",\n    \"email\":\"worker1@email.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/auth/signup"
+					},
+					"response": []
+				},
+				{
+					"name": "endpoint-access",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoidXNlcjMiLCJpYXQiOjE2OTIwNzk5MzgsInJvbGVzIjoiVVNFUiJ9.aWmVDRP-jUe_xbwHlCXk4CbeCiYsE6OHdTzNlyvY8xquKBK512FV3WiKcaLo3n_Apa_8jhIQiG94EKH9CXfOa-0DRx18fsvCBLYfmSKovDdoP3r7fsOkT1FdQMKLSvfEOxwfKsVVu82qM2JZFiHbc8r8QcAaoDQ0h6PleKuKjzbXYF-22MvyZlIeWvx3ZMF_cVYaU6JtzVFJCwJG4WodX-GnTHdzWCnPHIHnpacLdRhchFXq4AzENu_xWWWFg3GWlqaEeYMcZg8INaj6r3mk4NjnQIv_3NHDHKAWJjkWY0kvPfo--SCkV_CPxJhAha_27jN1-nQoUvoVfu38ZYcLMw"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/user/"
+					},
+					"response": []
+				},
+				{
+					"name": "admin access",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoidGVzdHVzZXIzIiwiaWF0IjoxNjkyMjAyNTkzLCJyb2xlcyI6IlJPTEVfVVNFUiJ9.deMePzszrcJqWCckqH8c_QY2y5ktQjnS6MRuq82tZrsn1qLSe1w9e9LL9p0upTNtynYknO4vYq0n2GNxrbNHpte5Fs1XD8vblgVUHec9_mIJev5AIuSn-bw-oJ-iR-QVCW-7I0uWMqkMHOZIBmTrP36th4lu3Fv-MntVQvfFDGzXEQLoTYKhHvG-SehelVW7cUBRvrJRH5EHj0Hy8ItHuG0nG-NHpyF0KquueEvsw8XPRoGI-RlNcOx1EfsmrnVf1yUUKJ4C335a7bdSY2NQqb7QWfcLcUZ0PCHAnzTiDJR2Tjftr4nTiuGxEVYqTddc1pKET4-h3FB3DWmTgor4MA"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "localhost:8080/admin/path1"
+					},
+					"response": []
+				},
+				{
+					"name": "refresh token",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoidGVzdHVzZXIzIiwiZXhwIjoxNjkyMjkwNzY0LCJpYXQiOjE2OTIyOTA3NTQsInJvbGVzIjoiUk9MRV9VU0VSIn0.ChmDGwxj8JjjYrXxoqyjpuCR7b6BDTlbk-zag4GZiKghcZhbEdVpGD18g4D6BmdyklxW-6_2XuDeAw9NaG166arz1dwntPj2fPNe5Dyw3w3R7Y8P3w5Q-qntb0u3R-1NMsuHt7C2odHj-5M87RSNLona5zSlulxV-iQjpFFGPOS2pvOzcm13e4Fmm_uLx_91hs1_yI4euSoh11xFgGsEB5Mkg03ah2gLF6ZeB5o2lA7YAeGcLzEsqSieBIvLvtSXpbDtbVkNO4DtVIdRfCh7RdVrR72vfl-Cfm9NHYTUPii4taKPFvb3JrZiL3eY1ON9Eg4dhaf_l6oso1tr0hF7Mg"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"refreshToken\":\"213eeedd-deac-4aba-bec2-d05cd1cb6917\",\n    \"username\":\"testuser3\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:8080/api/auth/logout"
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoidGVzdHVzZXIzIiwiZXhwIjoxNjkyMjkwODU4LCJpYXQiOjE2OTIyOTA4NDgsInJvbGVzIjoiUk9MRV9VU0VSIn0.ouByc-bEafSDt327CCyEXGNEob_AH9MoP9kT1whTuZZG2vlBb244Jo_PUHbpSvXQB61I76JfuaxPysWpSrp3M2r8i5PagebwAkwtH0Q0IFpi-mnNcULkZY9cx_xgLcfS2niBy7aOkftia2_Lxc5XMMMNwjE0fxDx6IrMvV0OarUTgYEFbz1dyFb96qWjmlYpd3O0xi4Rn3b2SpBAsaA_YCgG8bukVuKWz4y1OaTNrdF3rKdug5uNbjS3KoXPRgATIkyJX4v6NSGq7jJxRLi-3f96nLSoByMeByHZHQu6XVMkgk5kjiikUQjZBctOhBfuX7NForIxwpZeZUNBO4h3RA"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"refreshToken\":\"213eeedd-deac-4aba-bec2-d05cd1cb6917\",\n    \"username\":\"testuser3\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:8080/api/auth/logout"
+					},
+					"response": []
+				},
+				{
+					"name": "account verification.",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": "http://localhost:8080/api/auth/accountVerification/244c5b06-227e-4208-a89c-99fceaea1c30"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "posts",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoidGVzdHVzZXIzIiwiaWF0IjoxNjkyMjA4OTYyLCJyb2xlcyI6IlJPTEVfVVNFUiJ9.xb5q57VFXlT1YH4I9We_3Spe_DPlxD0L9mEX9HSBioMlvw5PmDu1tlMIh-NT7sanX_UXifqNUQtFC0QVMYOWJh19016M5oE-7X2N0tbwr11gr-2mprGaZ_9weMdeo0khE6-OfZzaWmbOQKY378SG-AGGnyGpLhKzgThz4ytUWnUEHehMcXej1p2GanB3DcQqrmvPB0caGdsJxrShWXpychHNDx2cL1_L5U-30YKEMTm9-FU5pM-dMGM5Qz67ADKV0G3B3d2aLJk13mG_gRNtLoiG-ajpmhj_e21y6jayCLLMzO-GfmLIN3NyJQncqSUe2ayr-ICQxGea48o3_19Gyw"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"postName\":\"novak\",\n    \"subredditName\":\"tennis\",\n    \"url\":\"\",\n    \"description\":\"novak\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:8080/api/posts"
+					},
+					"response": []
+				},
+				{
+					"name": "get all",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": "localhost:8080/api/posts/all"
+					},
+					"response": []
+				},
+				{
+					"name": "by-subreddit/{subreddit-id}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoid29ya2VyMSIsImV4cCI6MTY5NTk0NTk0NiwiaWF0IjoxNjk0OTQ1OTQ2LCJyb2xlcyI6IlJPTEVfVVNFUiJ9.mntGRLc32kEZrdOoxwGScHWlcGt4ydvLvAnQ6Sjs6JnhQXcrIbct3tRIOdRrfIfC2FDImoJpDYho861zJiWJbNAizLVJoHz_NZL9yXJtx6ziRgI_MWyFmlxBt7nPaKBADho_RqAju9zpwuIoQY9VrB3oyd2K_6fruSByUpRww64TcVBdjKLFEMzIOa0j5TJl6J6H2zIuQ0ijhaRxtTsLUWxWVVewzP4TkXOsWNWbxpLfWmq2rNqjCWZX2dgbVLH9zQss8iJO4l84cwPphkz61L8ORXtgh9UBwfmu3c9_hGMR4Y3yKetcIitaHaLQja6m_SxvnCSh82Il0ZIrOlVHLA"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "localhost:8080/api/posts/by-subreddit/1"
+					},
+					"response": []
+				},
+				{
+					"name": "get by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoidGVzdHVzZXIzIiwiaWF0IjoxNjkyMjA4OTYyLCJyb2xlcyI6IlJPTEVfVVNFUiJ9.xb5q57VFXlT1YH4I9We_3Spe_DPlxD0L9mEX9HSBioMlvw5PmDu1tlMIh-NT7sanX_UXifqNUQtFC0QVMYOWJh19016M5oE-7X2N0tbwr11gr-2mprGaZ_9weMdeo0khE6-OfZzaWmbOQKY378SG-AGGnyGpLhKzgThz4ytUWnUEHehMcXej1p2GanB3DcQqrmvPB0caGdsJxrShWXpychHNDx2cL1_L5U-30YKEMTm9-FU5pM-dMGM5Qz67ADKV0G3B3d2aLJk13mG_gRNtLoiG-ajpmhj_e21y6jayCLLMzO-GfmLIN3NyJQncqSUe2ayr-ICQxGea48o3_19Gyw"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "localhost:8080/api/posts/1"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "comments",
+			"item": [
+				{
+					"name": "create comment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoidGVzdHVzZXIzIiwiaWF0IjoxNjkyMjgzODM5LCJyb2xlcyI6IlJPTEVfVVNFUiJ9.rR4qwIBEltWFsZzYkx70vrdfFZtNgZJ9Wx3zR-B1ijJlvjqmWmt9GF54zeCKdWSVY7b8K5QZ1gvMamgwmZSi94DdUpW7PcIBrTrmm_pT54PqWTjWuZAUcoLYXGRxuIZNrMHQOd-8cC2E1NGkIKHxg9w-Kspm2wMDmOlQrHTsPN7b14KGOWXTvaqUj5rEDZA_5diEQvM1Sy8xgATRR6f6rfSMui_3MNIsIbQekwzY7z0Fv5_A7Rh6cyFCq05quHvhlavfopsi-TS74cHs-vqpE-pbBl9qsXUKCLkOBsF0ZilT0_OUJZ3xXX9bk24r-MVHJF9sG-kfqgyexAXliYJeKg"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"postId\":1,\n    \"text\":\"goat roger-3\",\n    \"userName\":\"testuser3\"\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:8080/api/comments"
+					},
+					"response": []
+				},
+				{
+					"name": "comments/by-post/1",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoidGVzdHVzZXIzIiwiaWF0IjoxNjkyMjgzODM5LCJyb2xlcyI6IlJPTEVfVVNFUiJ9.rR4qwIBEltWFsZzYkx70vrdfFZtNgZJ9Wx3zR-B1ijJlvjqmWmt9GF54zeCKdWSVY7b8K5QZ1gvMamgwmZSi94DdUpW7PcIBrTrmm_pT54PqWTjWuZAUcoLYXGRxuIZNrMHQOd-8cC2E1NGkIKHxg9w-Kspm2wMDmOlQrHTsPN7b14KGOWXTvaqUj5rEDZA_5diEQvM1Sy8xgATRR6f6rfSMui_3MNIsIbQekwzY7z0Fv5_A7Rh6cyFCq05quHvhlavfopsi-TS74cHs-vqpE-pbBl9qsXUKCLkOBsF0ZilT0_OUJZ3xXX9bk24r-MVHJF9sG-kfqgyexAXliYJeKg"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "localhost:8080/api/comments/by-post/1"
+					},
+					"response": []
+				},
+				{
+					"name": "comments/by-user/52",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoidGVzdHVzZXIzIiwiaWF0IjoxNjkyMjgzODM5LCJyb2xlcyI6IlJPTEVfVVNFUiJ9.rR4qwIBEltWFsZzYkx70vrdfFZtNgZJ9Wx3zR-B1ijJlvjqmWmt9GF54zeCKdWSVY7b8K5QZ1gvMamgwmZSi94DdUpW7PcIBrTrmm_pT54PqWTjWuZAUcoLYXGRxuIZNrMHQOd-8cC2E1NGkIKHxg9w-Kspm2wMDmOlQrHTsPN7b14KGOWXTvaqUj5rEDZA_5diEQvM1Sy8xgATRR6f6rfSMui_3MNIsIbQekwzY7z0Fv5_A7Rh6cyFCq05quHvhlavfopsi-TS74cHs-vqpE-pbBl9qsXUKCLkOBsF0ZilT0_OUJZ3xXX9bk24r-MVHJF9sG-kfqgyexAXliYJeKg"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "localhost:8080/api/comments/by-user/testuser3"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "votes",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoidGVzdHVzZXIzIiwiaWF0IjoxNjkyMjg0MzI0LCJyb2xlcyI6IlJPTEVfVVNFUiJ9.uTD9IunMCLqpwES567BaUW5FvDxjUqfnAhmg7fqRvIXT1O-Afm-tXIbOz4O1-wPjGDo7MPhtDjX06nGC9xCUW0fzXesyyCMtsZgmFNj8avQ224HqO2C9zF265jGsYzKCFio3BMH-ZkFe8eIG8cbkxSBF9RErAZaU37_H3ia3hBT9-Kul49dgO6-YfQl6ejR9Bf4slnhK5DqXXRKbnCjAJxYZFtu7iQPnVOKvEWiGVZGJBuxsQEPxNeHOrSlmn1-ZnIxHAzobyqBO__2zgSyv6dHebJ8Nf1oHwrwSlhFk3r5sIuDlFit4fH6EqKLeUxbZHVh1a5HDXeSEd3KNWEFAMA"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"voteType\":0,\n    \"postId\":2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:8080/api/votes"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "localhost:8080/swagger-ui.html",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoid29ya2VyMSIsImV4cCI6MTY5NTk3NzgyNiwiaWF0IjoxNjk0OTc3ODI2LCJyb2xlcyI6IlJPTEVfVVNFUiJ9.Bhk0pNmofcwzOt6-r8vnvzjzNaIAr8IiR4O5wMFoqT1S-sTMxn81ToictFwlv2hBl-XjmEoESwXyPH5_RseWkZLBqykfuexGPHPam-JUSGf36kStu_NlcVCqkch9pYi71zqMFFNMo5vv8Sj07Bc1Ig_fx7BTmKwf9Mm4DCIF0RMWBW3IQF54vpejw8F1byF_YrrSU5BJaNUxzInkMSpNi4CbTJvqGXQN7uHoffwlyKQyIEvopXRgCBGbJWJbsNyI31Ns-FhwwGwIsy-i0amU8wUGm9X5NOV1XbXiqQ14HEnT5uB9aFPw06NlMiK_m07lCk0ohfjIIt3gbgAXpjDCxA"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/v3/api-docs"
+			},
+			"response": []
+		}
+	]
+}

@@ -4,7 +4,6 @@ import { getToken } from "./AuthService";
 
 const baseURL = 'http://localhost:8080/api/topic'
 
-
 export const createTopic = (topicObj) => {
     return axios.post(baseURL, topicObj)
 }
@@ -14,12 +13,8 @@ export const getTopics = () => {
 }
 
 export const getTopicIdByTopicName = (topicName) => {
-
     return axios.get(baseURL + '/get-id/' + topicName);
 }
-
-
-
 
 export const getAllSubscribedTopics = (username) => {
     console.log('sending request to ' + baseURL + '/topics/' + username);

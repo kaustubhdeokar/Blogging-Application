@@ -1,9 +1,7 @@
 import axios from "axios";
-import React from "react";
 import { getToken } from "./AuthService";
 
 const baseURL = 'http://localhost:8080/api/posts'
-
 const commentBaseUrl = 'http://localhost:8080/api/comments'
 
 export const getAllPosts = () => {

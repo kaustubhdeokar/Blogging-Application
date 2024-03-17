@@ -1,5 +1,4 @@
 import axios from "axios";
-import React from "react";
 
 const baseURL = "http://localhost:8080/api/auth";
 
@@ -15,8 +14,8 @@ export const storeToken = (token) => {
 export const getToken = () => localStorage.getItem("token");
 
 export const saveLoggedInUser = (username, role) => {
-    sessionStorage.setItem("authenticatedUser", username);
-    sessionStorage.setItem("role", role);
+    localStorage.setItem("authenticatedUser", username);
+    localStorage.setItem("role", role);
 }
 
 
@@ -33,10 +32,9 @@ export const isUserLoggedIn = () => {
 }
 
 export const getLoggedInUser = () => {
-    return sessionStorage.getItem("authenticatedUser");
+    return localStorage.getItem("authenticatedUser");
 }
 
 export const logout = () => {
     localStorage.clear();
-    sessionStorage.clear();
 }

@@ -11,16 +11,19 @@ import { getAllPostsInTopic } from '../service/PostsService';
 function PostComponent() {
 
     const [posts, setPosts] = useState([])
-    const {topicName} = useParams()
+    const { topicName } = useParams()
+    var [postState, setPostState] = useState(0);
 
     useEffect(() => {
         if (topicName) {
             listAllPostsInTopic(topicName);
+            postState = 1;
         }
         else {
             listAllPostsBySubscription();
+            postState = 0;
         }
-    }, [posts])
+    }, [postState, topicName])
 
     function listAllPostsInTopic(topicName) {
         getAllPostsInTopic(topicName).then((response) => {
@@ -36,6 +39,15 @@ function PostComponent() {
         }).catch(error => {
             console.log(error);
         })
+    }
+
+    function getGenericTitle() {
+        if (topicName) {
+            <div>For Topic {topicName} </div>
+        }
+        else {
+
+        }
     }
 
     function listAllPostsBySubscription() {
@@ -62,10 +74,11 @@ function PostComponent() {
     return (
 
         < div >
-            
+            <span>{getGenericTitle}</span>
             {
+
                 posts.map(post =>
-                    <div className='row post' key={post.id}>
+                    <div className='row post' key={post.topicName+":"+post.id}>
                         <div className="col-md-1">
                             <VoteComponent post={post} />
                         </div>

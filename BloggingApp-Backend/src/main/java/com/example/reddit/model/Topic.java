@@ -1,5 +1,6 @@
 package com.example.reddit.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -10,6 +11,7 @@ import lombok.NoArgsConstructor;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 
 @Data
@@ -35,15 +37,20 @@ public class Topic {
 
     private Instant createddate;
 
+    @JsonIgnore
+    @ManyToMany(mappedBy = "topics")
+    private List<User> users;
+
     @ManyToOne
-    private User user;
+    @JoinColumn(name = "userid", referencedColumnName = "userid")
+    private User createdby;
 
     public Topic(String name, String description, User user) {
         this.name = name;
         this.description = description;
         this.posts = new ArrayList<>();
         this.createddate = Instant.now();
-        this.user = user;
+        this.createdby = user;
     }
 
     @Override

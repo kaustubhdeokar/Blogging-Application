@@ -2,7 +2,9 @@ package com.example.reddit.controller;
 
 import com.example.reddit.dto.PostRequest;
 import com.example.reddit.dto.PostResponse;
+import com.example.reddit.model.Post;
 import com.example.reddit.service.PostService;
+import com.example.reddit.service.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +22,8 @@ public class PostController {
 
     @Autowired
     private PostService postService;
+    @Autowired
+    private TopicService topicService;
 
     @PostMapping("")
     public ResponseEntity<Void> createPosts(@RequestBody PostRequest postRequest) {
@@ -43,9 +47,16 @@ public class PostController {
         return status(HttpStatus.OK).body(postService.getPostsByTopic(id));
     }
 
+    @GetMapping("/by-topic-name/{name}")
+    public ResponseEntity<List<PostResponse>> getPostsByTopicName(@PathVariable String name) {
+        Long topicId = topicService.getTopicByName(name);
+        List<PostResponse> postsByTopic = postService.getPostsByTopic(topicId);
+        return status(HttpStatus.OK).body(postsByTopic);
+    }
+
     @GetMapping("/by-user/{name}")
     public ResponseEntity<List<PostResponse>> getPostsByUsername(@PathVariable String name) {
-        return status(HttpStatus.OK).body(postService.getPostsByUsername(name));
+        return status(HttpStatus.OK).body(postService.getPostsFromSubscribedTopics(name));
     }
 
 }

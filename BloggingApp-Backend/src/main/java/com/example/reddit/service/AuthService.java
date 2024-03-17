@@ -6,6 +6,7 @@ import com.example.reddit.dto.RegisterUserDto;
 import com.example.reddit.exception.CustomException;
 import com.example.reddit.model.*;
 import com.example.reddit.repo.RoleRepo;
+import com.example.reddit.repo.TopicRepo;
 import com.example.reddit.repo.UserRepo;
 import com.example.reddit.repo.VerificationTokenRepo;
 import com.example.reddit.security.JwtTokenProvider;
@@ -24,10 +25,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 @Transactional
@@ -37,6 +35,8 @@ public class AuthService {
     private MailService mailService;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private TopicRepo topicRepo;
     @Autowired
     private UserRepo userRepo;
     @Autowired
@@ -118,5 +118,25 @@ public class AuthService {
         String refreshToken = refreshTokenRequest.getRefreshToken();
         Instant expiry = Instant.now().plusMillis(jwtProvider.getExpirationDate());
         return new AuthenticationResponse(refreshTokenRequest.getUsername(), token, refreshToken, expiry);
+    }
+
+    public void addTopicForUser(String username, String topicName) {
+        User user = userRepo.findByUsername(username).orElseThrow(() -> new CustomException("User not found with id -" + username));
+        Topic topic = topicRepo.findByName(topicName).orElseThrow(() -> new CustomException("User not found with id -" + username));
+        user.getTopics().add(topic);
+        userRepo.save(user);
+    }
+
+    public User getUser(String username){
+        return userRepo.findByUsername(username).orElseThrow(() -> new CustomException("User not found with id -" + username));
+    }
+
+
+    public void getRolesForUser(String username) {
+        User user = userRepo.findByUsername(username).orElseThrow(() -> new CustomException("User not found with id -" + username));
+        Optional<List<Object[]>> rolesByUserid = userRepo.findRolesByUserid(user.getUserid());
+        for (Object role : rolesByUserid.get()) {
+            System.out.println(role);
+        }
     }
 }

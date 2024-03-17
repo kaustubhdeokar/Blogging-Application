@@ -28,7 +28,7 @@ public class TopicController {
     public ResponseEntity<String> create(@RequestBody TopicDto topicDto) {
         User user = userService.getPrincipalUser();
         topicService.save(new Topic(topicDto.getName(), topicDto.getDescription(), user));
-        return new ResponseEntity<>("Subreddit: " + topicDto.getName() + " created.", HttpStatus.OK);
+        return new ResponseEntity<>("Topic: " + topicDto.getName() + " created.", HttpStatus.OK);
     }
 
     @GetMapping("/all")
@@ -40,9 +40,16 @@ public class TopicController {
 
     @GetMapping("/{id}")
     @CrossOrigin(origins = "*")
-    public ResponseEntity<TopicDto> getSubReddit(@PathVariable Long id) {
-        TopicDto subReddit = topicService.getSubReddit(id);
-        return new ResponseEntity<>(subReddit, HttpStatus.OK);
+    public ResponseEntity<TopicDto> getTopic(@PathVariable Long id) {
+        TopicDto topic = topicService.getTopic(id);
+        return new ResponseEntity<>(topic, HttpStatus.OK);
+    }
+
+    @GetMapping("/get-id/{name}")
+    @CrossOrigin(origins = "*")
+    public ResponseEntity<Long> getTopicIdByName(@PathVariable String name) {
+        Long topicId = topicService.getTopicByName(name);
+        return new ResponseEntity<>(topicId, HttpStatus.OK);
     }
 
 

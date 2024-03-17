@@ -1,9 +1,7 @@
 package com.example.reddit.controller;
 
-import com.example.reddit.dto.AuthenticationResponse;
-import com.example.reddit.dto.LoginRequestDto;
-import com.example.reddit.dto.RefreshTokenRequest;
-import com.example.reddit.dto.RegisterUserDto;
+import com.example.reddit.dto.*;
+import com.example.reddit.model.User;
 import com.example.reddit.model.VerificationToken;
 import com.example.reddit.service.AuthService;
 import com.example.reddit.service.RefreshTokenService;
@@ -13,6 +11,9 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -59,5 +60,32 @@ public class AuthController {
         return ResponseEntity.status(HttpStatus.OK).body("Logged out.");
     }
 
+    @PostMapping("/add-topic")
+    public ResponseEntity<String> addTopicForUser(@RequestBody UserTopicDto userTopicDto) {
+        String username = userTopicDto.getUserName();
+        String topicId = userTopicDto.getTopicName();
+        service.addTopicForUser(username, topicId);
+        return ResponseEntity.status(HttpStatus.OK).body("Topic added.");
+    }
+
+    @GetMapping("/get-roles/{username}")
+    public ResponseEntity<String> getRolesForUser(@PathVariable String username) {
+        service.getRolesForUser(username);
+        return ResponseEntity.status(HttpStatus.OK).body("Roles queried.");
+    }
+
+    @GetMapping("/topics/{username}")
+    public ResponseEntity<List<TopicDto>> getTopicsSubscribedByUser(@PathVariable String username) {
+        User user = service.getUser(username);
+        List<TopicDto> collect = user.getTopics().stream().map(topic -> new TopicDto(topic.getTopicid(), topic.getName(), topic.getDescription())).collect(Collectors.toList());
+        return ResponseEntity.status(HttpStatus.OK).body(collect);
+    }
+
+    @GetMapping("/topic-ids/{username}")
+    public ResponseEntity<List<Long>> getTopicIdSubscribedByUser(@PathVariable String username) {
+        User user = service.getUser(username);
+        List<Long> topicIds = user.getTopics().stream().map(topic -> topic.getTopicid()).collect(Collectors.toList());
+        return ResponseEntity.status(HttpStatus.OK).body(topicIds);
+    }
 
 }

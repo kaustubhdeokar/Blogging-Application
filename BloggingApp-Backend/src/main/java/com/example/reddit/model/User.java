@@ -11,7 +11,9 @@ import lombok.NoArgsConstructor;
 
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -39,6 +41,12 @@ public class User {
             joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "userid")},
             inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "roleid")})
     private List<Role> roles = new ArrayList<>();
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "topic_subscribed",
+            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "userid")},
+            inverseJoinColumns = {@JoinColumn(name = "topic_id", referencedColumnName = "topicid")})
+    private List<Topic> topics = new ArrayList<>();
 
     public User(String username, String password, String email, List<Role> roles) {
         this.username = username;

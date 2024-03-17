@@ -11,10 +11,17 @@ export const getAllPosts = () => {
     return axios.get(baseURL + '/all');
 }
 
-export const getPost = (id) => {
-    console.log('getting post'+id);
-    return axios.get(baseURL+'/'+id);
+export const getAllPostsFromSubscribedTopics = (username) => {
+    console.log('sending request to ' + baseURL + '/by-user/' + username);
+    return axios.get(baseURL + '/by-user/' + username);
 }
+
+
+export const getPost = (id) => {
+    console.log('getting post' + id);
+    return axios.get(baseURL + '/' + id);
+}
+
 
 axios.interceptors.request.use(function (config) {
     config.headers['Authorization'] = getToken();
@@ -33,4 +40,8 @@ export const createComment = (commentObj) => {
 
 export const getAllCommentsByPost = (postid) => {
     return axios.get(commentBaseUrl + '/by-post/' + postid);
+}
+
+export const getAllPostsInTopic = (topicName) => {
+    return axios.get(baseURL + '/by-topic-name/' + topicName);
 }

@@ -12,6 +12,8 @@ import CreatePostComponent from './components/CreatePostComponent'
 import CreateTopicComponent from './components/CreateTopicComponent'
 import ViewPost from './components/ViewPost'
 import UserProfile from './components/UserProfile'
+import ListTopics from './components/ListTopics'
+import PostComponent from './components/PostComponent'
 
 function App() {
 
@@ -25,11 +27,14 @@ function App() {
           <Route path='/' element={< LoginComponent />}></Route>
           <Route path='/new' element={< NewComponent />}></Route>
           <Route path='/home' element={< HomeComponent />}></Route>
+          <Route path='/home/:topicName' element={< HomeComponent />}></Route>
           <Route path='/vote' element={< VoteComponent />}></Route>
           <Route path='/create-post' element={< CreatePostComponent />}></Route>
           <Route path='/create-topic' element={< CreateTopicComponent />}></Route>
           <Route path='/view-post/:id' element={< ViewPost />}></Route>
           <Route path='/userprofile' element={< UserProfile />}></Route>
+          <Route path='/list-topics' element={< ListTopics />}></Route>
+          <Route path='/view-topic/:topicName' element={< PostComponent />}></Route>
         </Routes>
       </BrowserRouter >
     </>

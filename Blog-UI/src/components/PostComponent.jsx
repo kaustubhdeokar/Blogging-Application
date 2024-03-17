@@ -3,14 +3,32 @@ import { getAllPosts } from '../service/PostsService'
 import VoteComponent from './VoteComponent';
 import { Link } from 'react-router-dom';
 import './PostComponent.css'
+import { getLoggedInUser } from '../service/AuthService';
+import { getAllPostsFromSubscribedTopics } from '../service/PostsService';
+import { useParams } from 'react-router-dom';
+import { getAllPostsInTopic } from '../service/PostsService';
 
 function PostComponent() {
 
     const [posts, setPosts] = useState([])
+    const {topicName} = useParams()
 
     useEffect(() => {
-        listAllPosts();
-    }, [])
+        if (topicName) {
+            listAllPostsInTopic(topicName);
+        }
+        else {
+            listAllPostsBySubscription();
+        }
+    }, [posts])
+
+    function listAllPostsInTopic(topicName) {
+        getAllPostsInTopic(topicName).then((response) => {
+            setPosts(response.data);
+        }).catch(error => {
+            console.log(error);
+        })
+    }
 
     function listAllPosts() {
         getAllPosts().then((response) => {
@@ -20,16 +38,31 @@ function PostComponent() {
         })
     }
 
-    function calculateDuration(duration){
-        const dateString = "2024-03-11T03:16:44.668162Z";
+    function listAllPostsBySubscription() {
+        const user = getLoggedInUser()
+        getAllPostsFromSubscribedTopics(user).then((response) => {
+            setPosts(response.data);
+        }).catch(error => {
+            console.log(error);
+        })
+    }
+
+
+    function calculateDuration(duration) {
+        const dateString = duration;
         const providedDate = new Date(dateString);
 
         const currentDate = new Date();
+        const differenceInMilliseconds = currentDate - providedDate;
+        const differenceInSeconds = differenceInMilliseconds / (1000 * 60 * 60 * 24);
+
+        return Math.floor(differenceInSeconds) + ' days ago'
     }
 
     return (
-        <div>
-            <h2 className='text-center'>List of Posts</h2>
+
+        < div >
+            
             {
                 posts.map(post =>
                     <div className='row post' key={post.id}>
@@ -38,12 +71,8 @@ function PostComponent() {
                         </div>
 
                         <div className='col-md-11'>
-                            <span className="subreddit-info">
-                                <span className="subreddit-text"><a className="posturl">{post.topicName}</a></span>
-                                <span> . Posted by <a className="username">{post.userName}</a></span>
-                                <span> . Duration {post.duration}</span>
-                            </span>
-                            <hr />
+
+
                             <div className="post-title">
                                 <a className="postname" href="{{post.url}}">{post.postName}</a>
                             </div>
@@ -51,21 +80,28 @@ function PostComponent() {
                                 <p className="post-text">{post.description}</p>
                             </div>
                             <hr />
+                            <span className="subreddit-info">
+                                <span className="subreddit-text"><a className="posturl">
+                                    <Link to={`/home/${(post.topicName)}`}>
+                                        {post.topicName}
+                                    </Link>
+                                </a></span>
+                                <span> . Posted by <a className="username">{post.userName}</a></span>
+                                <span> {calculateDuration(post.duration)}</span>
+                            </span> &nbsp;&nbsp;
                             <span>
                                 <a className="btnCommments" role="button">
                                     Comments({post.commentNum})
-                                </a>
+                                </a>&nbsp;&nbsp;
                                 <Link to={`/view-post/${post.id}`}>
-                                    <button className="login">
-                                        Read Post
-                                    </button>
+                                    Read Post
                                 </Link>
                             </span>
                         </div>
                     </div>
                 )
             }
-        </div>
+        </div >
     )
 }
 export default PostComponent

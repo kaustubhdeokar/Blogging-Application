@@ -13,6 +13,7 @@ function RegisterComponent() {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const navigate = useNavigate()
+    
 
     function handleRegistrationForm(e) {
 

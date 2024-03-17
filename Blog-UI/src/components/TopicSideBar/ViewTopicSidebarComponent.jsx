@@ -23,20 +23,26 @@ function ViewTopicSidebarComponent() {
     }
 
     return (
-        <div className='container'>
-            <div className="sidebar-view-subreddit">
-                <div style={{ color: "black", fontweight: "bold" }}>Browse Subreddits</div>
-                <div>
-                    {
-                        topics.map(topic =>
-                            <div className='subreddit-text' key={topic.topicid}>
-                                <Link to={`/view-topic/${topic.topicid}`}>{topic.name}</Link>
-                            </div>
-                        )
-                    }
-                </div >
+        <div className="sidebar-view-subreddit">
+            <div className='title'>Topics</div>
+            <hr />
+            <div>
+                <Link to={`/list-topics`}>View All</Link>
+            </div>
+            <hr />
+            <div>
+                {
+                    topics.map(topic =>
+                        <span className='subreddit-text' key={topic.topicid}>
+                            <Link to={`/view-topic/${topic.topicid}`}>{topic.name}</Link>
+                            <hr />
+                        </span>
+                    )
+                }
             </div >
-        </div>
+
+
+        </div >
     )
 }
 

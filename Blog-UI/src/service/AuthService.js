@@ -18,6 +18,32 @@ export const saveLoggedInUser = (username, role) => {
     localStorage.setItem("role", role);
 }
 
+export const getAllSubscribedTopicsByUser = () => {
+    if (isUserLoggedIn) {
+        const username = getLoggedInUser();
+        console.log('sending request to ' + baseURL + '/topics/' + username);
+        return axios.get(baseURL + '/topics/' + username);
+    }
+    else {
+        console.log('bad request');
+    }
+}
+
+export const addTopicForUser = (topicName) => {
+    if (isUserLoggedIn) {
+        const userName = getLoggedInUser();
+        const userTopic = { userName, topicName }
+        return axios.post(baseURL + '/add-topic', userTopic);
+    }
+}
+
+export const removeTopicForUser = (topicName) => {
+    if (isUserLoggedIn) {
+        const userName = getLoggedInUser();
+        const userTopic = { userName, topicName }
+        return axios.post(baseURL + '/remove-topic', userTopic);
+    }
+}
 
 export const isUserLoggedIn = () => {
 

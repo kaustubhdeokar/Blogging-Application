@@ -120,14 +120,30 @@ public class AuthService {
         return new AuthenticationResponse(refreshTokenRequest.getUsername(), token, refreshToken, expiry);
     }
 
-    public void addTopicForUser(String username, String topicName) {
+    public boolean addTopicForUser(String username, String topicName) {
         User user = userRepo.findByUsername(username).orElseThrow(() -> new CustomException("User not found with id -" + username));
         Topic topic = topicRepo.findByName(topicName).orElseThrow(() -> new CustomException("User not found with id -" + username));
-        user.getTopics().add(topic);
-        userRepo.save(user);
+        List<Topic> topics = user.getTopics();
+        if (!topics.contains(topic)) {
+            user.getTopics().add(topic);
+            userRepo.save(user);
+            return true;
+        }
+        return false;
     }
 
-    public User getUser(String username){
+
+    public void removeTopicForUser(String username, String topicName) {
+        User user = userRepo.findByUsername(username).orElseThrow(() -> new CustomException("User not found with id -" + username));
+        Topic topic = topicRepo.findByName(topicName).orElseThrow(() -> new CustomException("User not found with id -" + username));
+        List<Topic> topics = user.getTopics();
+        if (topics.contains(topic)) {
+            user.getTopics().remove(topic);
+            userRepo.save(user);
+        }
+    }
+
+    public User getUser(String username) {
         return userRepo.findByUsername(username).orElseThrow(() -> new CustomException("User not found with id -" + username));
     }
 

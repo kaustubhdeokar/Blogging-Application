@@ -64,8 +64,19 @@ public class AuthController {
     public ResponseEntity<String> addTopicForUser(@RequestBody UserTopicDto userTopicDto) {
         String username = userTopicDto.getUserName();
         String topicId = userTopicDto.getTopicName();
-        service.addTopicForUser(username, topicId);
-        return ResponseEntity.status(HttpStatus.OK).body("Topic added.");
+        if (service.addTopicForUser(username, topicId)) {
+            return ResponseEntity.status(HttpStatus.OK).body("Topic added.");
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Topic already added.");
+        }
+    }
+
+    @PostMapping("/remove-topic")
+    public ResponseEntity<String> removeTopicForUser(@RequestBody UserTopicDto userTopicDto) {
+        String username = userTopicDto.getUserName();
+        String topicId = userTopicDto.getTopicName();
+        service.removeTopicForUser(username, topicId);
+        return ResponseEntity.status(HttpStatus.OK).body("Topic removed.");
     }
 
     @GetMapping("/get-roles/{username}")

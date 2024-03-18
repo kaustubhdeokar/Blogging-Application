@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -84,7 +85,8 @@ public class PostService {
                 .orElseThrow(() -> new UsernameNotFoundException(name));
         List<Long> topicIds = user.getTopics().stream().map(topic -> topic.getTopicid()).collect(Collectors.toList());
         List<PostResponse> allSubscribedPosts = new ArrayList<>();
-        for (Long topicId : topicIds) {
+        Set<Long> collect = topicIds.stream().collect(Collectors.toSet());
+        for (Long topicId : collect) {
             allSubscribedPosts.addAll(getPostsByTopic(topicId));
         }
         return allSubscribedPosts;

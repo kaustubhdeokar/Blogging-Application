@@ -57,7 +57,7 @@ function PostComponent() {
         console.log('trigger post update');
         setPostState(2); // Update the value in the parent component
     };
-    
+
     return (
 
         < div >
@@ -73,9 +73,9 @@ function PostComponent() {
                         <div className='col-md-11'>
                             <div className="post-title">
                                 <Link to={`/view-post/${post.id}`}>
-                                <span className="postname">{post.postName}</span>
+                                    <span className="postname">{post.postName}</span>
                                 </Link>
-                                
+
                             </div>
                             <div>
                                 <p className="post-text">{post.description}</p>
@@ -93,9 +93,7 @@ function PostComponent() {
                                 <span> {calculateDuration(post.duration)}</span>
                             </span> &nbsp;&nbsp;
                             <span>
-                                <a className="btnCommments" role="button">
-                                    Comments({post.commentCount})
-                                </a>&nbsp;&nbsp;
+                                &nbsp;&nbsp;
                                 <Link to={`/view-post/${post.id}`}>
                                     Read Post
                                 </Link>

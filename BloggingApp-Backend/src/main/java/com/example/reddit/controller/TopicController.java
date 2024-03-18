@@ -52,5 +52,11 @@ public class TopicController {
         return new ResponseEntity<>(topicId, HttpStatus.OK);
     }
 
+    @GetMapping("/get-name/{topicId}")
+    @CrossOrigin(origins = "*")
+    public ResponseEntity<String> getTopicNameById(@PathVariable Long topicId) {
+        TopicDto topic = topicService.getTopic(topicId);
+        return new ResponseEntity<>(topic.getName(), HttpStatus.OK);
+    }
 
 }

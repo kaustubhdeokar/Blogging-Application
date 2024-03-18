@@ -21,15 +21,15 @@ const SideBarComponent = () => {
 
             <div className="sidebar">
 
-                <div className='center-div'>Come here to check in with your favorite topics.
+                <div className='center-div title'>Shortcuts.
                 </div>
 
-                <div className='center-div'>
-                    <button className="btnCreatePost" onClick={goToCreatePost}>Create Post</button>
+                <div className=''>
+                    <button className="btn btn-link" onClick={goToCreatePost}>Create Post</button>
                 </div>
 
-                <div className='center-div'>
-                    <button className="btnCreateSubreddit" onClick={goToCreateSubreddit}>Create Topic</button>
+                <div className=''>
+                    <button className="btn btn-link" onClick={goToCreateSubreddit}>Create Topic</button>
                 </div>
             </div>
 

@@ -24,7 +24,7 @@ function ViewTopicSidebarComponent() {
 
     return (
         <div className="sidebar-view-subreddit">
-            <div className='title'>Topics</div>
+            <div className='center-div title'>Topics</div>
             <hr />
             <div>
                 <Link to={`/list-topics`}>View All</Link>
@@ -34,7 +34,7 @@ function ViewTopicSidebarComponent() {
                 {
                     topics.map(topic =>
                         <span className='subreddit-text' key={topic.topicid}>
-                            <Link to={`/view-topic/${topic.topicid}`}>{topic.name}</Link>
+                            <Link to={`/view-topic/${topic.name}`}>{topic.name}</Link>
                             <hr />
                         </span>
                     )

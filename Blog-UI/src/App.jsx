@@ -34,7 +34,7 @@ function App() {
           <Route path='/view-post/:id' element={< ViewPost />}></Route>
           <Route path='/userprofile' element={< UserProfile />}></Route>
           <Route path='/list-topics' element={< ListTopics />}></Route>
-          <Route path='/view-topic/:topicName' element={< PostComponent />}></Route>
+          <Route path='/view-topic/:topicName' element={< HomeComponent />}></Route>
         </Routes>
       </BrowserRouter >
     </>

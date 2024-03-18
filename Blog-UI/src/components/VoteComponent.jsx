@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './VoteComponent.css'
 import { votePost } from '../service/VoteService';
 
-const VoteComponent = ({ post }) => {
+const VoteComponent = ({ post, onChange }) => {
 
     const postId = post.id;
     var voteType = 0;
@@ -14,7 +14,7 @@ const VoteComponent = ({ post }) => {
         const voteDto = { postId, voteType };
 
         votePost(voteDto).then((response) => {
-            setPosts(response.data);
+            onChange();
         }).catch(error => {
             console.log(error);
         })
@@ -25,7 +25,7 @@ const VoteComponent = ({ post }) => {
         const voteDto = { postId, voteType };
 
         votePost(voteDto).then((response) => {
-            setPosts(response.data);
+            onChange(); // triggers update of posts in parent component.
         }).catch(error => {
             console.log(error);
         })

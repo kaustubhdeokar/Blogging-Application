@@ -12,9 +12,13 @@ export const getTopics = () => {
     return axios.get(baseURL + '/all');
 }
 
-export const getTopicIdByTopicName = (topicName) => {
-    return axios.get(baseURL + '/get-id/' + topicName);
-}
+// export const getTopicIdByTopicName = (topicName) => {
+//     return axios.get(baseURL + '/get-id/' + topicName);
+// }
+
+// export const getTopicNameByTopicId = (topicId) => {
+//     return axios.get(baseURL + '/get-name/' + topicId);
+// }
 
 export const getAllSubscribedTopics = (username) => {
     console.log('sending request to ' + baseURL + '/topics/' + username);

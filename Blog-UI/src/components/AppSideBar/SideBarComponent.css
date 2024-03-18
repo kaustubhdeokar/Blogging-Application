@@ -1,6 +1,6 @@
 .sidebar{
-    width: 312px;
-    height: 242px;
+    width: auto;
+    height: auto;
     --post-line-color: #ccc;    
     border: 1px solid #ccc;
     margin-bottom: 10px;

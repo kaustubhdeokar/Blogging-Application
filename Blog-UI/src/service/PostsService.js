@@ -43,3 +43,14 @@ export const getAllCommentsByPost = (postid) => {
 export const getAllPostsInTopic = (topicName) => {
     return axios.get(baseURL + '/by-topic-name/' + topicName);
 }
+
+export function calculateDuration(duration) {
+    const dateString = duration;
+    const providedDate = new Date(dateString);
+
+    const currentDate = new Date();
+    const differenceInMilliseconds = currentDate - providedDate;
+    const differenceInSeconds = differenceInMilliseconds / (1000 * 60 * 60 * 24);
+
+    return Math.floor(differenceInSeconds) + ' days ago'
+}

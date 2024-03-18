@@ -8,6 +8,7 @@ import VoteComponent from './VoteComponent'
 import SideBarComponent from './AppSideBar/SideBarComponent'
 import ViewTopicSidebarComponent from './TopicSideBar/ViewTopicSidebarComponent'
 import './ViewPost.css'
+import { calculateDuration } from '../service/PostsService'
 
 function ViewPost() {
 
@@ -38,6 +39,9 @@ function ViewPost() {
         })
     }
 
+    function editPost() {
+
+    }
 
 
     async function postComment() {
@@ -66,23 +70,26 @@ function ViewPost() {
                         <div className="col-md-11">
                             <span>
                                 <span className='subreddit-text'>
-                                    <a className='post-url' href=''>{post.topicName}</a>
+                                    <Link to={`/home/${(post.topicName)}`}>
+                                        <span className='post-url'>{post.topicName}</span>
+                                    </Link>
+
                                 </span>
                                 <span> Posted
-                                    <span> . Duration {post.duration}</span>
-                                    <span> . by <a className="username">{post.userName}</a></span>
+                                    <span>, {calculateDuration(post.duration)}</span>
+                                    <span>, by <a className="username">{post.userName}</a></span>
                                 </span>
                             </span>
                             <hr />
                             <span className="post-title">
-                                <a className="postname" href="{{post.url}}">{post.postName}</a>
+                                <span className="postname">{post.postName}</span>
                             </span>
                             <span>
                                 <p className="post-text">{post.description}</p>
                             </span>
                             <hr />
                             <span>
-                                <a className="btnCommments" role="button">
+                                <a>
                                     Comments({post.commentNum})
                                 </a>
                             </span>
@@ -96,7 +103,8 @@ function ViewPost() {
                                             onChange={(e) => setComment(e.target.value)}
                                             placeholder="Your Thoughts?"></textarea>
                                     </div>
-                                    <button type="submit" className="login float-right">Comment</button>
+
+                                    <button type="submit">Comment</button>
                                 </form>
                             </div >
 

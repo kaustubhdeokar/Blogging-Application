@@ -2,20 +2,21 @@ import React, { useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import { getLoggedInUser, isUserLoggedIn } from '../service/AuthService';
 import { logout } from '../service/AuthService';
+import { useState } from 'react';
+
 const HeaderComponent = () => {
 
-    const isAuth = isUserLoggedIn();
     const loggedInUserName = getLoggedInUser();
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     function callLogout() {
         logout();
     }
 
     useEffect(() => {
-        
-        
-        
-      }, [isAuth])
+        var isAuth = isUserLoggedIn();
+        setIsLoggedIn(isAuth);
+    }, [isLoggedIn])
 
     return (
         <div>
@@ -31,30 +32,30 @@ const HeaderComponent = () => {
                             <ul className="navbar-nav ms-auto">
                                 <li className="nav-item active">
                                     {
-                                        !isAuth &&
+                                        !isLoggedIn &&
                                         <NavLink to="/sign-up" className="nav-link">Sign up</NavLink>
                                     }
                                 </li>
                                 <li className="nav-item">
                                     {
-                                        isAuth &&
+                                        isLoggedIn &&
                                         <NavLink to="/home" className="nav-link">Home</NavLink>
                                     }
                                 </li>
                                 <li className="nav-item">
-                                    {!isAuth &&
+                                    {!isLoggedIn &&
                                         <NavLink to="/login" className="nav-link">Login</NavLink>
                                     }
                                 </li>
                                 <li className="nav-item">
                                     {
-                                        isAuth &&
+                                        isLoggedIn &&
                                         <NavLink to="/login" className="nav-link" onClick={callLogout}>Logout</NavLink>
                                     }
                                 </li>
                                 <li className="nav-item">
                                     {
-                                        isAuth &&
+                                        isLoggedIn &&
                                         <NavLink to="/userprofile" className="nav-link">{loggedInUserName}</NavLink>
                                     }
                                 </li>

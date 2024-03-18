@@ -31,7 +31,7 @@ function ListTopics() {
                         {
                             topics.map(topic =>
                                 <li key={topic.topicid}>
-                                    <Link to={`/view-topic/${topic.topicid}`}>{topic.name}</Link>
+                                    <Link to={`/view-topic/${topic.name}`}>{topic.name}</Link>
                                 </li>
                             )
                         }

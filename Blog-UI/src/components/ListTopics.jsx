@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import SideBarComponent from './AppSideBar/SideBarComponent';
 import { getAllSubscribedTopicsByUser } from '../service/AuthService';
 import { addTopicForUser, removeTopicForUser } from '../service/AuthService';
-
+import SearchBar from './SearchBar';
 
 function ListTopics() {
 
@@ -71,18 +71,43 @@ function ListTopics() {
         }
     }
 
+    function showDescription(topicDescription) {
+        var len = topicDescription.length;
+        return topicDescription.substring(0, Math.min(len, 20)) + '...';
+    }
+
+    function filterTopics(topicString) {
+        if (topicString === "") {
+            listAllTopics();
+        }
+        else {
+            var resultTopics = topics.filter(topic => topic.name.toLowerCase().includes(topicString.toLowerCase()))
+            resultTopics.forEach(topic => console.log(topic.name));
+            setTopics(resultTopics);
+        }
+    }
+
+    function clearTopics(){
+        listAllTopics();
+    }
 
     return (
         <div className='container'>
             <div className="row">
                 <hr />
                 <div className="col-md-9">
+                    <div>
+                        <SearchBar onChange={filterTopics} />
+                    </div>
                     <h2>List of Topics</h2>
                     <ul>
                         {
                             topics.map(topic =>
                                 <li key={topic.topicid}>
                                     <Link to={`/view-topic/${topic.name}`}>{topic.name}</Link>
+                                    <span>
+                                        &nbsp;&nbsp;&nbsp; {showDescription(topic.description)}
+                                    </span>
                                     <span>
                                         {handleSubscription(topic.name)}
                                     </span>

@@ -83,13 +83,11 @@ function PostComponent() {
                             <hr />
                             <span className="subreddit-info">
                                 <span className="subreddit-text">
-                                    <a className="posturl">
-                                        <Link to={`/home/${(post.topicName)}`}>
-                                            {post.topicName}
-                                        </Link>
-                                    </a>
-                                </span>
-                                <span>Posted by <a className="username">{post.userName}</a></span>
+                                    <Link className="posturl" to={`/home/${(post.topicName)}`}>
+                                        {post.topicName}
+                                    </Link>
+                                </span> &nbsp;&nbsp;
+                                <span>Posted by <span className="username">{post.userName}</span></span>
                                 <span> {calculateDuration(post.duration)}</span>
                             </span> &nbsp;&nbsp;
                             <span>

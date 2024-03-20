@@ -19,10 +19,20 @@ export const saveLoggedInUser = (username, role) => {
 }
 
 export const getAllSubscribedTopicsByUser = () => {
-    if (isUserLoggedIn) {
+    if (isUserLoggedIn()) {
         const username = getLoggedInUser();
         console.log('sending request to ' + baseURL + '/topics/' + username);
         return axios.get(baseURL + '/topics/' + username);
+    }
+    else {
+        console.log('bad request');
+    }
+}
+
+export const getAllSubscribedTopicNamesByUser = () => {
+    if (isUserLoggedIn) {
+        const username = getLoggedInUser();
+        return axios.get(baseURL + '/user-info/' + username);
     }
     else {
         console.log('bad request');

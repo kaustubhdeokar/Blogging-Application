@@ -44,6 +44,11 @@ export const getAllPostsInTopic = (topicName) => {
     return axios.get(baseURL + '/by-topic-name/' + topicName);
 }
 
+export const getAllPostsByUser = (username) => {
+    return axios.get(baseURL + '/by-user/' + username);
+}
+
+
 export function calculateDuration(duration) {
     const dateString = duration;
     const providedDate = new Date(dateString);

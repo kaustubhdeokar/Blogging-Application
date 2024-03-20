@@ -14,8 +14,15 @@ import ViewPost from './components/ViewPost'
 import UserProfile from './components/UserProfile'
 import ListTopics from './components/ListTopics'
 import PostComponent from './components/PostComponent'
+import { isUserLoggedIn } from './service/AuthService'
 
 function App() {
+
+  function AuthenticatedRoute({ children }) {
+    const isAuth = isUserLoggedIn();
+    if (isAuth) { return children; }
+    return <Navigate to="/" />
+  }
 
   return (
     <>
@@ -26,15 +33,16 @@ function App() {
           <Route path='/login' element={< LoginComponent />}></Route>
           <Route path='/' element={< LoginComponent />}></Route>
           <Route path='/new' element={< NewComponent />}></Route>
-          <Route path='/home' element={< HomeComponent />}></Route>
-          <Route path='/home/:topicName' element={< HomeComponent />}></Route>
+
+          <Route path='/home' element={<AuthenticatedRoute>< HomeComponent /></AuthenticatedRoute>}></Route>
+          <Route path='/home/:topicName' element={<AuthenticatedRoute>< HomeComponent /></AuthenticatedRoute>}></Route>
           <Route path='/vote' element={< VoteComponent />}></Route>
-          <Route path='/create-post' element={< CreatePostComponent />}></Route>
-          <Route path='/create-topic' element={< CreateTopicComponent />}></Route>
-          <Route path='/view-post/:id' element={< ViewPost />}></Route>
+          <Route path='/create-post' element={<AuthenticatedRoute>< CreatePostComponent /></AuthenticatedRoute>}></Route>
+          <Route path='/create-topic' element={<AuthenticatedRoute>< CreateTopicComponent /></AuthenticatedRoute>}></Route>
+          <Route path='/view-post/:id' element={<AuthenticatedRoute>< ViewPost /></AuthenticatedRoute>}></Route>
           <Route path='/userprofile' element={< UserProfile />}></Route>
-          <Route path='/list-topics' element={< ListTopics />}></Route>
-          <Route path='/view-topic/:topicName' element={< HomeComponent />}></Route>
+          <Route path='/list-topics' element={<AuthenticatedRoute>< ListTopics /></AuthenticatedRoute>}></Route>
+          <Route path='/view-topic/:topicName' element={<AuthenticatedRoute>< HomeComponent /></AuthenticatedRoute>}></Route>
         </Routes>
       </BrowserRouter >
     </>

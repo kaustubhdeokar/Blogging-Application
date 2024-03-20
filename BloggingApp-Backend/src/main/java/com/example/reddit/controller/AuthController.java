@@ -99,4 +99,11 @@ public class AuthController {
         return ResponseEntity.status(HttpStatus.OK).body(topicIds);
     }
 
+    @GetMapping("/user-info/{username}")
+    public ResponseEntity<List<String>> getUserInfo(@PathVariable String username) {
+        User user = service.getUser(username);
+        List<String> topics = user.getTopics().stream().map(topic -> topic.getName()).collect(Collectors.toList());
+        return ResponseEntity.status(HttpStatus.OK).body(topics);
+    }
+
 }

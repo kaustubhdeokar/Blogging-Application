@@ -75,7 +75,6 @@ function PostComponent() {
                                 <Link to={`/view-post/${post.id}`}>
                                     <span className="postname">{post.postName}</span>
                                 </Link>
-
                             </div>
                             <div>
                                 <p className="post-text">{post.description}</p>

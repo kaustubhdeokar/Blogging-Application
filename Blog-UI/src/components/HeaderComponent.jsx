@@ -11,6 +11,7 @@ const HeaderComponent = () => {
 
     function callLogout() {
         logout();
+        setIsLoggedIn(false);
     }
 
     useEffect(() => {

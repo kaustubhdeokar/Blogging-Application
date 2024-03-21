@@ -15,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.DisabledException;
@@ -53,6 +54,8 @@ public class AuthService {
 
     public boolean signup(RegisterUserDto registerUserDto) throws DataIntegrityViolationException {
 
+        checkIfUserAlreadyExists(registerUserDto);
+
         List<Role> roles = new ArrayList<>();
         Role roleUser = roleRepo.findByName("ROLE_USER");
         if (roleUser == null) {
@@ -69,6 +72,20 @@ public class AuthService {
         String verificationToken = generateVerificationToken(user);
         mailService.sendEmail(new NotificationEmail("Account activation", user.getEmail(), formMailBody(verificationToken)));
         return true;
+    }
+
+    private void checkIfUserAlreadyExists(RegisterUserDto registerDto) {
+        String username = registerDto.getUsername();
+        if (userRepo.existsByUsername(username)) {
+            throw new CustomException(HttpStatus.BAD_REQUEST,
+                    String.format("Username %s exists in the database", username));
+        }
+        String email = registerDto.getEmail();
+        if (userRepo.existsByEmail(email)) {
+            throw new CustomException(HttpStatus.BAD_REQUEST,
+                    String.format("Email %s exists in the database", email));
+        }
+
     }
 
     private String formMailBody(String token) {

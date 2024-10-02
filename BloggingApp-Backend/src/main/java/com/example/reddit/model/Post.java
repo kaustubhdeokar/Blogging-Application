@@ -44,6 +44,8 @@ public class Post {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "post", cascade = CascadeType.ALL)
     private List<Vote> vote;
 
+    private Long commentDocumentDbId;
+
     public Post(String postname, String url, String description, User user, Topic topic) {
         this.postname = postname;
         this.url = url;

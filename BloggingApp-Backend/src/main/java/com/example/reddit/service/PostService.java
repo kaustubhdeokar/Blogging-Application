@@ -1,8 +1,7 @@
 package com.example.reddit.service;
 
-import com.example.reddit.dto.PostRequest;
+import com.example.reddit.dto.PostRequestDto;
 import com.example.reddit.dto.PostResponse;
-import com.example.reddit.dto.TopicDto;
 import com.example.reddit.exception.CustomException;
 import com.example.reddit.model.Post;
 import com.example.reddit.model.Topic;
@@ -56,12 +55,12 @@ public class PostService {
         return postRepo.findAll().stream().map(this::getPostResponse).collect(Collectors.toList());
     }
 
-    public void save(PostRequest postRequest) {
-        Topic topic = topicRepo.findByName(postRequest.getTopicName())
-                .orElseThrow(() -> new CustomException(postRequest.getTopicName()));
+    public void save(PostRequestDto postRequestDto) {
+        Topic topic = topicRepo.findByName(postRequestDto.getTopicName())
+                .orElseThrow(() -> new CustomException(postRequestDto.getTopicName()));
 //        voteRepo.findVoteByPostAndUser(postRequest.getPostName(), userService.getPrincipalUser());
-        postRepo.save(new Post(postRequest.getPostName(), postRequest.getUrl(),
-                postRequest.getDescription(), userService.getPrincipalUser(), topic));
+        postRepo.save(new Post(postRequestDto.getPostName(), postRequestDto.getUrl(),
+                postRequestDto.getDescription(), userService.getPrincipalUser(), topic));
     }
 
 

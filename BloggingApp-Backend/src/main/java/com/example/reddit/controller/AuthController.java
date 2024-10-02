@@ -8,9 +8,13 @@ import com.example.reddit.service.RefreshTokenService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.HttpRequestHandler;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.support.HttpRequestHandlerServlet;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -40,7 +44,7 @@ public class AuthController {
     public ResponseEntity<String> verifyAccount(@PathVariable String token) {
         VerificationToken verificationToken = service.verifyToken(token);
         service.enableUserHavingToken(verificationToken);
-        return new ResponseEntity<>("account verified.", HttpStatus.OK);
+        return new ResponseEntity<>("Account verified. Proceed to login page: /login", HttpStatus.OK);
     }
 
     @PostMapping("/login")

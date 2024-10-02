@@ -20,7 +20,7 @@ public class CommentsController {
 
     @PostMapping("")
     public ResponseEntity<Void> createComment(@RequestBody CommentsDto commentsDto) {
-        commentsService.save(commentsDto);
+        commentsService.addCommentToPost(commentsDto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -30,8 +30,8 @@ public class CommentsController {
                 .body(commentsService.getAllCommentsForPost(postId));
     }
 
-    @GetMapping("/by-user/{userName}")
-    public ResponseEntity<List<CommentsDto>> getAllCommentsByUser(@PathVariable String userName) {
-        return status(HttpStatus.OK).body(commentsService.getAllCommentsForUser(userName));
-    }
+//    @GetMapping("/by-user/{userName}")
+//    public ResponseEntity<List<CommentsDto>> getAllCommentsByUser(@PathVariable String userName) {
+//        return status(HttpStatus.OK).body(commentsService.getAllCommentsForUser(userName));
+//    }
 }

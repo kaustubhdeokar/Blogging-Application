@@ -1,40 +1,33 @@
 package com.example.reddit.model;
 
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.Id;
+import lombok.*;
 
 import java.time.Instant;
 @Data
-@Builder
-@AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "comment")
-@Table(name = "comment")
+@AllArgsConstructor
+@Getter
+@Setter
 public class Comment {
-
+    @org.springframework.data.annotation.Transient
+    public static final String ID_VAL = "sequence_generator";
+    @org.springframework.data.annotation.Transient
+    public static final String GENERATED_ID = "commentId";
+    @org.springframework.data.annotation.Transient
+    public static final String ID_KEY = "id";
     @Id
-    @GeneratedValue
-    private Long commentid;
-
+    private Long commentId;
     private String text;
-
     private Instant createddate;
+    private String username;
+    private Long postId;
 
-    @ManyToOne
-    @JoinColumn(name = "userid", referencedColumnName = "userid")
-    private User user;
-
-    @ManyToOne
-    @JoinColumn(name = "postid", referencedColumnName = "postid")
-    private Post post;
-
-    public Comment(String text, User user, Post post) {
+    public Comment(Long commentId, String text, String user, Long postId) {
+        this.commentId = commentId;
         this.text = text;
         this.createddate = Instant.now();
-        this.user = user;
-        this.post = post;
+        this.username = user;
+        this.postId = postId;
     }
 }

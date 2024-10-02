@@ -1,8 +1,7 @@
 package com.example.reddit.controller;
 
-import com.example.reddit.dto.PostRequest;
+import com.example.reddit.dto.PostRequestDto;
 import com.example.reddit.dto.PostResponse;
-import com.example.reddit.model.Post;
 import com.example.reddit.service.PostService;
 import com.example.reddit.service.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +25,8 @@ public class PostController {
     private TopicService topicService;
 
     @PostMapping("")
-    public ResponseEntity<Void> createPosts(@RequestBody PostRequest postRequest) {
-        postService.save(postRequest);
+    public ResponseEntity<Void> createPosts(@RequestBody PostRequestDto postRequestDto) {
+        postService.save(postRequestDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 

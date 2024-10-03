@@ -32,12 +32,11 @@
 |    Search Topic Service  |        |   Voting Service           |
 |                          |        |  Upvote/Downvote Posts     |
 +--------------------------+        +----------------------------+                                             
-
-+--------------------------+   DB   +----------------------------+                                             
-                    +-------------------------+
-                    |     MySQL               |
-                    +-------------------------+
-
++ ------------------------------+ Database +------------------------------+
+        +-------------------------+  +-------------------------+
+        |     MySQL               |  |   MongoDB (Comments)    |
+        +-------------------------+  +-------------------------+
+                
 ```
 
 ## Overview
@@ -50,7 +49,7 @@ Supports functionality for
 - Supports CRUD operation regarding creation of posts inside topics.<br>
 - Topics, multiple posts under each topic
 - User - topic subscription
-- Comments under post.
+- Comments under posts stored in MongoDB.
 - Votes for each posts.
 - Search functionality for topics.
 
@@ -60,4 +59,5 @@ Supports functionality for
 - The schema for the same can be found in file `schema.sql` in the root directory.
 - For running it locally, <strong> setup.md </strong> can be used to download the required additional applications.<br>
 
-
+### Changes:
+- Comment Management: The Comment Management service remains as is, but it now interacts with MongoDB instead of MySQL.

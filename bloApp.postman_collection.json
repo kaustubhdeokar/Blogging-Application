@@ -1,0 +1,460 @@
+{
+	"info": {
+		"_postman_id": "1f1cb39e-4473-44ac-837d-849aa2d524d4",
+		"name": "Blogging Application",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "7749014"
+	},
+	"item": [
+		{
+			"name": "topic",
+			"item": [
+				{
+					"name": "create topics",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0dXNlcjEiLCJpYXQiOjE3MTA2NzIzODUsImV4cCI6MTcxMDY3ODM4NX0.gNasYn5iv1aUmlwzh9i7ro6fwuTrg1gubb4JltvfASEjxxQgyyFbXGhY0gwordt_HFYU6N2Lt10JesBrMGDGmw"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"tennis\",\n    \"description\":\"Welcome to Tennis Community!\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:8080/api/topic"
+					},
+					"response": []
+				},
+				{
+					"name": "all topics",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0dXNlcjEiLCJpYXQiOjE3MTA2Njc3MzAsImV4cCI6MTcxMDY3MzczMH0.-0PaK0JWwhMJWZudJv528qeGyIhn-9tTzv6bIWMMgao7PcSYZtaoXb-Hy3wxoMRaibF4OG-WjOVX73s6C0GCVw"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "localhost:8080/api/topic/all"
+					},
+					"response": []
+				},
+				{
+					"name": "by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0dXNlcjEiLCJpYXQiOjE3MTA1ODg3NTYsImV4cCI6MTcxMDU5NDc1Nn0.oxUOXm5krj0R-LfTpau3PlqDXCKFHVCy0XrFBRNyholi80iJgwfMYXb1wKyBVrtvpj8MtUO5jPnNN3jGt_sfvQ"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "localhost:8080/api/topic/52"
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0dXNlcjMiLCJpYXQiOjE3MTA4NjU0MjYsImV4cCI6MTcxMDg3MTQyNn0.IjsUsBc-iP9bdNUv99Gvd5dcWirvk-zLk-71xvsyTj_B1bs5zhjRJH9i8ef4B0--_MYwLvtM_VEERicKQYnimg"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "localhost:8080/api/topic/topics/"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user-auth",
+			"item": [
+				{
+					"name": "add topic for user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0dXNlcjMiLCJpYXQiOjE3MTA4NzI1OTMsImV4cCI6MTcxMDg3ODU5M30.YQt0X55YOE3UoLf_uSZIFhf1xTbcNv4xM4oqV7_HcBZ7PjVnQQ92WwBUw6pxSmPb6QmGrFFe4MVadvn07UpDhw"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userName\":\"testuser3\",\n    \"topicName\":\"mumbai\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/auth/add-topic"
+					},
+					"response": []
+				},
+				{
+					"name": "signup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\":\"testuser4@gmail.com\",\n    \"username\":\"testuser4\",\n    \"password\":\"testuser4\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:8080/api/auth/signup"
+					},
+					"response": []
+				},
+				{
+					"name": "accountVerification",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/api/auth/accountVerification/5977e555-bc79-42dc-a5c3-08c4df269d94"
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\":\"testuser3\",\n    \"password\":\"testuser3\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/auth/login"
+					},
+					"response": []
+				},
+				{
+					"name": "login-jwt",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\":\"user3\",\n    \"password\":\"user3\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/auth/login"
+					},
+					"response": []
+				},
+				{
+					"name": "register user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\":\"worker1\",\n    \"password\":\"worker1\",\n    \"email\":\"worker1@email.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/auth/signup"
+					},
+					"response": []
+				},
+				{
+					"name": "get topics for user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0dXNlcjMiLCJpYXQiOjE3MTA5NTIyNTksImV4cCI6MTcxMDk1ODI1OX0.NR62CrVlnFXnP1JGSKCMTTRjlTz-_t-O64GrYkhtX0ZmwUm5-924qwllk8Byfy22nR0TGvn7BGX1Rl60U681AA"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/api/auth/topics/testuser3"
+					},
+					"response": []
+				},
+				{
+					"name": "refresh token",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoidGVzdHVzZXIzIiwiZXhwIjoxNjkyMjkwNzY0LCJpYXQiOjE2OTIyOTA3NTQsInJvbGVzIjoiUk9MRV9VU0VSIn0.ChmDGwxj8JjjYrXxoqyjpuCR7b6BDTlbk-zag4GZiKghcZhbEdVpGD18g4D6BmdyklxW-6_2XuDeAw9NaG166arz1dwntPj2fPNe5Dyw3w3R7Y8P3w5Q-qntb0u3R-1NMsuHt7C2odHj-5M87RSNLona5zSlulxV-iQjpFFGPOS2pvOzcm13e4Fmm_uLx_91hs1_yI4euSoh11xFgGsEB5Mkg03ah2gLF6ZeB5o2lA7YAeGcLzEsqSieBIvLvtSXpbDtbVkNO4DtVIdRfCh7RdVrR72vfl-Cfm9NHYTUPii4taKPFvb3JrZiL3eY1ON9Eg4dhaf_l6oso1tr0hF7Mg"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"refreshToken\":\"213eeedd-deac-4aba-bec2-d05cd1cb6917\",\n    \"username\":\"testuser3\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:8080/api/auth/logout"
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJzZWxmIiwic3ViIjoidGVzdHVzZXIzIiwiZXhwIjoxNjkyMjkwODU4LCJpYXQiOjE2OTIyOTA4NDgsInJvbGVzIjoiUk9MRV9VU0VSIn0.ouByc-bEafSDt327CCyEXGNEob_AH9MoP9kT1whTuZZG2vlBb244Jo_PUHbpSvXQB61I76JfuaxPysWpSrp3M2r8i5PagebwAkwtH0Q0IFpi-mnNcULkZY9cx_xgLcfS2niBy7aOkftia2_Lxc5XMMMNwjE0fxDx6IrMvV0OarUTgYEFbz1dyFb96qWjmlYpd3O0xi4Rn3b2SpBAsaA_YCgG8bukVuKWz4y1OaTNrdF3rKdug5uNbjS3KoXPRgATIkyJX4v6NSGq7jJxRLi-3f96nLSoByMeByHZHQu6XVMkgk5kjiikUQjZBctOhBfuX7NForIxwpZeZUNBO4h3RA"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"refreshToken\":\"213eeedd-deac-4aba-bec2-d05cd1cb6917\",\n    \"username\":\"testuser3\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:8080/api/auth/logout"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "posts",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0dXNlcjEiLCJpYXQiOjE3MTA2Njk2MTAsImV4cCI6MTcxMDY3NTYxMH0.GfWdsloF8bsqPfsn9VXJqELmcMamDckf2V0dJDMMUhPNeXiPVyjARwddG-EFkkXaQTXhBPpkG3KE0vmNaw_vJA"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"postName\":\"US Open\",\n    \"topicName\":\"tennis\",\n    \"url\":\"\",\n    \"description\":\" The US Open is the last of the four major annual tennis Grand Slam tournament.\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:8080/api/posts"
+					},
+					"response": []
+				},
+				{
+					"name": "get all",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0dXNlcjIiLCJpYXQiOjE3MTAxNzgwNTIsImV4cCI6MTcxMDE4NDA1Mn0.NnbnF4ulHxBB_w9n83RRYq76hIDan6yFDCv-hiYJvZPKo3t81orO2OBvT0GujSXtm_J0yh5h6-3tgx3be97uNA"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "localhost:8080/api/posts/all"
+					},
+					"response": []
+				},
+				{
+					"name": "by-subreddit/{subreddit-id}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0dXNlcjEiLCJpYXQiOjE3MDk5MDc5NjcsImV4cCI6MTcwOTkxMTU2N30.E9chkIx7OfO8Y6CTr-ogogDbdZODXBkcojOXPF0ghC8Mk2QpUGtZIuYCTkXxKbz13YRwamW5w9_9lVlPk06ydw"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "localhost:8080/api/posts/by-topic/4"
+					},
+					"response": []
+				},
+				{
+					"name": "get by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0dXNlcjEiLCJpYXQiOjE3MDk5MDc5NjcsImV4cCI6MTcwOTkxMTU2N30.E9chkIx7OfO8Y6CTr-ogogDbdZODXBkcojOXPF0ghC8Mk2QpUGtZIuYCTkXxKbz13YRwamW5w9_9lVlPk06ydw"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "localhost:8080/api/posts/1"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "comments",
+			"item": [
+				{
+					"name": "create comment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0dXNlcjEiLCJpYXQiOjE3MDk5MDc5NjcsImV4cCI6MTcwOTkxMTU2N30.E9chkIx7OfO8Y6CTr-ogogDbdZODXBkcojOXPF0ghC8Mk2QpUGtZIuYCTkXxKbz13YRwamW5w9_9lVlPk06ydw"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"postId\":1,\n    \"text\":\"goat roger\",\n    \"userName\":\"testuser1\"\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:8080/api/comments"
+					},
+					"response": []
+				},
+				{
+					"name": "comments/by-post/1",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0dXNlcjEiLCJpYXQiOjE3MDk5MDc5NjcsImV4cCI6MTcwOTkxMTU2N30.E9chkIx7OfO8Y6CTr-ogogDbdZODXBkcojOXPF0ghC8Mk2QpUGtZIuYCTkXxKbz13YRwamW5w9_9lVlPk06ydw"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "localhost:8080/api/comments/by-post/1"
+					},
+					"response": []
+				},
+				{
+					"name": "comments/by-user/52",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0dXNlcjEiLCJpYXQiOjE3MDk5MDc5NjcsImV4cCI6MTcwOTkxMTU2N30.E9chkIx7OfO8Y6CTr-ogogDbdZODXBkcojOXPF0ghC8Mk2QpUGtZIuYCTkXxKbz13YRwamW5w9_9lVlPk06ydw"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "localhost:8080/api/comments/by-user/testuser1"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "votes",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0dXNlcjEiLCJpYXQiOjE3MDk5MDc5NjcsImV4cCI6MTcwOTkxMTU2N30.E9chkIx7OfO8Y6CTr-ogogDbdZODXBkcojOXPF0ghC8Mk2QpUGtZIuYCTkXxKbz13YRwamW5w9_9lVlPk06ydw"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"voteType\":0,\n    \"postId\":1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:8080/api/votes"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "token",
+			"item": [
+				{
+					"name": "refresh",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0dXNlcjEiLCJpYXQiOjE3MTAwNjA3MjksImV4cCI6MTcxMDA2MTMyOX0.-EtMLDJV29D3Pys_uiOwOzBJOMQR50GB6gHA4ODYaM4ZHH8jBfH36n1V76PmM0yuGzKgFQVCeOzqfOY-HyCK4Q"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"refreshToken\":\"1088f133-5a94-49bd-a467-403ba0f3ebe9\",\n    \"username\":\"username1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/api/auth/refresh/token"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "localhost:8080/swagger-ui.html",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": ""
+			},
+			"response": []
+		}
+	]
+}

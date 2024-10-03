@@ -14,6 +14,7 @@ import ViewPost from './components/ViewPost'
 import UserProfile from './components/UserProfile'
 import ListTopics from './components/ListTopics'
 import PostComponent from './components/PostComponent'
+import AccountVerificationComponent from './components/AccountVerificationComponent'
 import { isUserLoggedIn } from './service/AuthService'
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
         <Routes>
           <Route path='/sign-up' element={< RegisterComponent />}></Route>
           <Route path='/login' element={< LoginComponent />}></Route>
+          <Route path='/api/auth/accountVerification/:id' element={< AccountVerificationComponent />}></Route>
           <Route path='/' element={< LoginComponent />}></Route>
           <Route path='/new' element={< NewComponent />}></Route>
 

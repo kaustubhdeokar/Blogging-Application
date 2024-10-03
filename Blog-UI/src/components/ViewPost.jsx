@@ -117,7 +117,7 @@ function ViewPost() {
                                                     {comment1.userName}
                                                 </Link>
                                                 <div>
-                                                    <p>{comment1.duration}</p>
+                                                    <p>{comment1.createdDate}</p>
                                                 </div>
                                                 <div>
                                                     <p>{comment1.text}</p>

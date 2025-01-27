@@ -4,7 +4,7 @@ import com.example.reddit.dto.TopicDto;
 import com.example.reddit.model.Topic;
 import com.example.reddit.model.User;
 import com.example.reddit.service.TopicService;
-import com.example.reddit.service.UserDetailsServiceImpl;
+import com.example.reddit.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +22,7 @@ public class TopicController {
     private TopicService topicService;
 
     @Autowired
-    private UserDetailsServiceImpl userService;
+    private CustomUserDetailsService userService;
 
     @PostMapping("")
     public ResponseEntity<String> create(@RequestBody TopicDto topicDto) {

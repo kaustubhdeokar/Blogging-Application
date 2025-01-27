@@ -24,7 +24,7 @@ public class CommentsService {
     @Autowired
     private CommentRepo commentRepository;
     @Autowired
-    private UserDetailsServiceImpl userService;
+    private CustomUserDetailsService userService;
     @Autowired
     private IdGeneratorService idGeneratorService;
     @Autowired

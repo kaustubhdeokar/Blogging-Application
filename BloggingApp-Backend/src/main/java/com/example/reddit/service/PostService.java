@@ -32,7 +32,7 @@ public class PostService {
     @Autowired
     private TopicRepo topicRepo;
     @Autowired
-    private UserDetailsServiceImpl userService;
+    private CustomUserDetailsService userService;
     @Autowired
     private UserRepo userRepo;
 

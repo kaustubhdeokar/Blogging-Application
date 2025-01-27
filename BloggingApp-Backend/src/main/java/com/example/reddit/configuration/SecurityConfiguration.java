@@ -2,8 +2,11 @@ package com.example.reddit.configuration;
 
 import com.example.reddit.security.JwtAuthFilter;
 import com.example.reddit.security.JwtAuthenticationEntryPoint;
-import com.example.reddit.service.UserDetailsServiceImpl;
+import com.example.reddit.service.CustomUserDetailsService;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import jakarta.websocket.Endpoint;
+import org.springframework.boot.actuate.autoconfigure.security.reactive.EndpointRequest;
+import org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,11 +31,9 @@ import org.thymeleaf.TemplateEngine;
 @AllArgsConstructor
 @OpenAPIDefinition
 public class SecurityConfiguration {
-
     private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
-    private UserDetailsServiceImpl userDetailsService;
+    private CustomUserDetailsService userDetailsService;
     private JwtAuthFilter jwtAuthenticationFilter;
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -76,7 +77,7 @@ public class SecurityConfiguration {
         http.cors(corsCustomizer()).
         csrf().disable()
                 .authorizeHttpRequests((authorize) -> {
-                            authorize.requestMatchers("api/auth/**").permitAll();
+                            authorize.requestMatchers("api/auth/**", "/actuator/**", "actuator").permitAll();
                             authorize.anyRequest().authenticated();
                         }
                 ).httpBasic(Customizer.withDefaults());

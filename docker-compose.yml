@@ -1,0 +1,52 @@
+version: "3"
+services:
+  mysqldb:
+    image: mysql:latest
+    container_name: mysql_blogit1
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: completeblogapp
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: password
+    volumes:
+      - ./schema.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "3306:3306"
+  mongodb:
+    image: mongo:latest
+    container_name: mongo_blogit1
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
+      
+    healthcheck:
+      test: ["CMD", "mongo", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 2
+  backend:
+    image: backend_blogit:latest
+    container_name: backend_blogit1
+    ports:
+      - 8081:8081
+    depends_on:
+      - mysqldb
+      - mongodb
+    environment:
+      - MONGO_URL=mongodb://admin:password@mongodb:27017/blogdb?authSource=admin
+      - SQL_URL=jdbc:mysql://mysqldb:3306/blogdb
+  frontend:
+    image: frontend_blogit:latest
+    container_name: frontend_blogit1
+    ports:
+      - 5173:5173
+    depends_on:
+      - mysqldb
+      - mongodb
+      - backend
+    links:
+      - mysqldb
+      - mongodb
+      - backend
